@@ -81,14 +81,14 @@
 
 <meta name="description" content="404 - arao&apos;blog">
 <meta property="og:type" content="website">
-<meta property="og:title" content="侯尚功的个人博客">
+<meta property="og:title" content="Hou-Blog">
 <meta property="og:url" content="http://yoursite.com/404.html">
-<meta property="og:site_name" content="侯尚功的个人博客">
+<meta property="og:site_name" content="Hou-Blog">
 <meta property="og:description" content="404 - arao&apos;blog">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-11-10T05:58:58.609Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="侯尚功的个人博客">
+<meta name="twitter:title" content="Hou-Blog">
 <meta name="twitter:description" content="404 - arao&apos;blog">
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title> | 侯尚功的个人博客</title>
+  <title> | Hou-Blog</title>
   
 
 
@@ -155,12 +155,12 @@
     <div class="custom-logo-site-title">
       <a href="/housg.github.io/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">侯尚功的个人博客</span>
+        <span class="site-title">Hou-Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">个人博客</p>
       
   </div>
 
@@ -569,48 +569,22 @@
 
 
 
-
-
-
-<!-- LOCAL: You can save these files to your site and update links -->
-    
-        
-        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
-        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
-    
-<!-- END LOCAL -->
-
-    
-
-    
-      <script type="text/javascript">
-      function renderGitment(){
-        var gitment = new Gitmint({
-            id: window.location.pathname, 
-            owner: 'housg',
-            repo: 'housg.github.io',
-            
-            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
-            
-            oauth: {
-            
-            
-                client_secret: 'ff53cc8397ce01c6528cc8e4fd6d584dc8c37163',
-            
-                client_id: '48f6b5c078f87628ac00'
-            }});
-        gitment.render('gitment-container');
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytjbOEBt';
+      var conf = '358123117431784fd19b7a2e754c43af';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
       }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
 
-      
-      function showGitment(){
-        document.getElementById("gitment-display-button").style.display = "none";
-        document.getElementById("gitment-container").style.display = "block";
-        renderGitment();
-      }
-      
-      </script>
-    
+
 
 
 
