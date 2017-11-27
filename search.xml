@@ -147,6 +147,83 @@ hexo deploy
     </entry>
     
     <entry>
+      <title><![CDATA[自定义ArrayList]]></title>
+      <url>/%E8%87%AA%E5%AE%9A%E4%B9%89ArrayList/</url>
+      <content type="html"><![CDATA[<h2 id="参考ArrayList的源码可以自己实现一个ArrayList代码如下："><a href="#参考ArrayList的源码可以自己实现一个ArrayList代码如下：" class="headerlink" title="参考ArrayList的源码可以自己实现一个ArrayList代码如下："></a>参考ArrayList的源码可以自己实现一个ArrayList代码如下：</h2><pre><code>public class MyArrayList&lt;E&gt; implements Iterable&lt;E&gt;{
+    //集合的大小
+    private int size;
+    //真正存放元素的数组的大小
+    private Object[] values = new Object[2];
+    /**
+     * 添加方法
+     * @param obj 要添加的元素
+     */
+    public void add(E e) {
+        //检查存放数组的数组是否已经放慢，如果放满，就将数组长度增加为原来的2倍
+        checkSize();
+        //然后放进去
+        values[size++] = e;
+    }
+    private void checkSize() {
+        if(size &gt;= values.length-1) {//如果数组的大小等于集合的大小，就放满了，就开辟新的数组
+            Object[] newValues = new Object[values.length*2];
+            //将旧数组中的元素复制到新数组中
+            copyOldToNewArr(values, newValues);
+            //把value指向新的数组
+            values = newValues;
+        }
+    }
+    private void copyOldToNewArr(Object[] oldArr, Object[] newArr) {
+        for(int i = 0; i &lt; oldArr.length; i++) {
+            newArr[i] = oldArr[i];
+        }
+    }
+    @SuppressWarnings(&quot;unchecked&quot;)
+    public E get(int index) {
+        if(index &gt;= size) {
+            throw new IndexOutOfBoundsException(&quot;索引越界&quot;);
+        }
+        return (E)values[index];
+    }
+    public int size() {
+        return size;
+    }
+    public Iterator&lt;E&gt; iterator() {
+        return new Itr&lt;E&gt;();
+    }
+    private class Itr&lt;E&gt; implements Iterator&lt;E&gt; {
+        int cursor;//定义光标，从0开始
+        @Override
+        public boolean hasNext() {
+            return cursor!=size;//如果光标不等于集合的大小，还有下一个元素
+        }
+        @Override
+        public E next() {
+            int i = cursor;
+            cursor++;
+            return (E) values[i];
+        }
+        @Override
+        public void remove() {
+
+        }
+
+    }
+}
+</code></pre>]]></content>
+      
+        
+        <tags>
+            
+            <tag> ArrayList </tag>
+            
+            <tag> 自定义 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[常见框架面试题]]></title>
       <url>/%E5%B8%B8%E8%A7%81%E6%A1%86%E6%9E%B6%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/</url>
       <content type="html"><![CDATA[<h1 id="流行的框架与新技术"><a href="#流行的框架与新技术" class="headerlink" title="流行的框架与新技术"></a>流行的框架与新技术</h1><h2 id="1、谈谈你对Struts的理解。"><a href="#1、谈谈你对Struts的理解。" class="headerlink" title="1、谈谈你对Struts的理解。"></a>1、谈谈你对Struts的理解。</h2><pre><code>答: 1. struts是一个按MVC模式设计的Web层框架，其实它就是一个大大的servlet，这个Servlet名为ActionServlet，或是ActionServlet的子类。我们可以在web.xml文件中将符合某种特征的所有请求交给这个Servlet处理，这个Servlet再参照一个配置文件（通常为/WEB-INF/struts-config.xml）将各个请求分别分配给不同的action去处理。
