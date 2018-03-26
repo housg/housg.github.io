@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,基础," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. Java 有没有 goto 语句？ goto 是 Java 中的保留字，在目前版本的Java中没有使用。根据James Gosling（Java之父）编写的《TheJavaProgrammingLanguage》一书的附录中给出了一个Java关键字列表，其中有goto和const，但是这两个是目前无法使用的关键字，因此有些地方将其称之为保留字，其实保留字这个词应该有更广泛的意义，因为熟悉C语">
+<meta name="keywords" content="java,基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaSE 语法">
+<meta property="og:url" content="http://yoursite.com/javaSE语法/index.html">
+<meta property="og:site_name" content="Hou-Blog">
+<meta property="og:description" content="1. Java 有没有 goto 语句？ goto 是 Java 中的保留字，在目前版本的Java中没有使用。根据James Gosling（Java之父）编写的《TheJavaProgrammingLanguage》一书的附录中给出了一个Java关键字列表，其中有goto和const，但是这两个是目前无法使用的关键字，因此有些地方将其称之为保留字，其实保留字这个词应该有更广泛的意义，因为熟悉C语">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-26T12:41:00.937Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaSE 语法">
+<meta name="twitter:description" content="1. Java 有没有 goto 语句？ goto 是 Java 中的保留字，在目前版本的Java中没有使用。根据James Gosling（Java之父）编写的《TheJavaProgrammingLanguage》一书的附录中给出了一个Java关键字列表，其中有goto和const，但是这两个是目前无法使用的关键字，因此有些地方将其称之为保留字，其实保留字这个词应该有更广泛的意义，因为熟悉C语">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/javaSE语法/"/>
+
+
+
+
+
+  <title>JavaSE 语法 | Hou-Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?43b991d69e3cf9c629c772d7c2c45d3a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hou-Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/javaSE语法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="侯尚功">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/upload/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hou-Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaSE 语法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-11T20:55:22+08:00">
+                2016-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/javaSE语法/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="javaSE语法/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/javaSE语法/" class="leancloud_visitors" data-flag-title="JavaSE 语法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+		   
+
+          
+
+          
+		  
+		  
+	
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-Java-有没有-goto-语句？"><a href="#1-Java-有没有-goto-语句？" class="headerlink" title="1. Java 有没有 goto 语句？"></a>1. Java 有没有 goto 语句？</h2><blockquote>
+<p>goto 是 Java 中的保留字，在目前版本的Java中没有使用。根据James Gosling（Java<br>之父）编写的《TheJavaProgrammingLanguage》一书的附录中给出了一个Java关键字列表，其中有goto和const，但是这两个是目前无法使用的关键字，因此有些地方将其称之为保留字，其实保留字这个词应该有更广泛的意义，因为熟悉C语言的程序员都知道，在系统类库中使用过的有特殊意义的单词或单词的组合都被视为保留字</p>
+</blockquote>
+<hr>
+<p>##2. &amp; 和 &amp;&amp; 的区别</p>
+<blockquote>
+<p>&amp;和&amp;&amp;都可以用作逻辑运算符，表示逻辑与。当运算符两边的表达式都为true时，结果才为true；否则，结果为false。<br>另外&amp;&amp;还具有短路功能，也就是说，当&amp;&amp;左边的表达式结果为false时，将不再运算&amp;&amp;右边的表达式，结果肯定为false。例如，对于if(str!=null&amp;&amp;!str.equals(“”)),当str为null时，不会对&amp;&amp;右边的表达式进行运算，否则会出现空指针异常。<br>&amp;还可以用作位运算符，当&amp;两边的表达式不是boolean类型时，&amp;表示按位与。</p>
+</blockquote>
+<hr>
+<p>##3.在 Java 中，如何跳出当前的多重嵌套循环<br>在java中，要想跳出多重循环，可以在外面的循环语句前定义一个标号，然后在里层循环体的代码中使用带有标号的的break语句，即可跳出外层循环。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ok:</span><br><span class="line"><span class="keyword">for</span>(int i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">for</span>(int j=<span class="number">0</span>;j&lt;<span class="number">10</span>;j++)</span><br><span class="line">&#123;</span><br><span class="line">     system.out.println(<span class="string">"i="</span>+i+<span class="string">",j="</span>+j);</span><br><span class="line">     <span class="keyword">if</span>(j==<span class="number">5</span>)<span class="keyword">break</span> ok;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另外，我个人觉得通常不使用标号这种方式，而是让外层的循环条件表达式的结果可以收到里层循环体代码的控制，例如，要在二维数组中查找到某个数字。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int arr[][]=&#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>&#125;,&#123;<span class="number">2</span>,<span class="number">2</span>,<span class="number">5</span>&#125;,&#123;<span class="number">4</span>,<span class="number">4</span>&#125;&#125;;</span><br><span class="line">boolean found =false;</span><br><span class="line"><span class="keyword">for</span>(int i=<span class="number">0</span>;i&lt;arr.length&amp;&amp;!found;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(int j=<span class="number">0</span>;j&lt;arr[i].length;j++)</span><br><span class="line">&#123;</span><br><span class="line">    system.out.println(<span class="string">"i="</span>+i+<span class="string">",j="</span>+j);</span><br><span class="line">    <span class="keyword">if</span>(arr[i][j]==<span class="number">5</span>)</span><br><span class="line">&#123;     </span><br><span class="line">    found=true;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>break和continue的区别？</strong><br>break是结束整个循环体，continue是结束单次循环（跳出当前循环，到下一步）。<br>例子1：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(x++ &lt; <span class="number">10</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == <span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(<span class="string">"%d\r\n"</span>, x);</span><br><span class="line">&#125;</span><br><span class="line">结果是输出  <span class="number">1</span> <span class="number">2</span>   就退出了整个<span class="keyword">while</span>循环</span><br><span class="line">但是如果使用<span class="keyword">continue</span></span><br><span class="line"><span class="keyword">while</span>(x++ &lt; <span class="number">10</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == <span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(<span class="string">"%d\r\n"</span>, x);</span><br><span class="line">&#125;</span><br><span class="line">结果是：<span class="number">1</span> <span class="number">2</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">10</span>  可见他仅仅是不输出<span class="number">3</span>，因为他结束了本次循环</span><br></pre></td></tr></table></figure></p>
+<p><strong>return和 break区别</strong></p>
+<blockquote>
+<p>break语句虽然可以独立使用，但通常主要用于switch语句中，控制程序的执行流程转移。<br>在switch语句中，其作用是强制退出switch结构，执行switch结构之后的语句。其本质就是在单层循环结构体系中，其作用是强制退出循环结构。<br>return语句用来明确地从一个方法返回。也就是，return<br>语句使程序控制返回到调用它方法。因此，将它分类为跳转语句.有两个作用，一个是返回方法指定类型的值（这个值总是确定的）；一个是结束方法的执行（仅仅一个return语句）。return语句可以使其从当前方法中退出，返回到调用该方法的语句处，继续程序的执行 。</p>
+</blockquote>
+<hr>
+<p>##4. 两个对象值相同 (x.equals(y) == true) ，但却可有不同的 hashCode，这句话对不对？</p>
+<blockquote>
+<p>不对，如果两个对象x和y满足x.equals(y)==true，它们的哈希码（hash<br>code）应当相同。Java对于eqauls方法和hashCode方法是这样规定的：(1)如果两个对象相同（equals方法返回true），那么它们的hashCode值一定要相同；(2)如果两个对象的hashCode相同，它们并不一定相同。当然，你未必要按照要求去做，但是如果你违背了上述原则就会发现在使用容器时，相同的对象可以出现在Set集合中，同时增加新元素的效率会大大下降（对于使用哈希存储的系统，如果哈希码频繁的冲突将会造成存取性能急剧下降）。<br><strong>补充</strong>：关于equals和hashCode方法，很多Java程序都知道，但很多人也就是仅仅知道而已，在Joshua Bloch的大作《Effective Java》（很多软件公司，《Effective<br>Java》、《Java编程思想》以及《重构：改善既有代码质量》是Java程序员必看书籍，如果你还没看过，那就赶紧去亚马逊买一本吧）中是这样介绍equals方法的：首先equals方法必须满足自反性（x.equals(x)必须返回true）、对称性（x.equals(y)返回true时，y.equals(x)也必须返回true）、传递性（x.equals(y)和y.equals(z)都返回true时，x.equals(z)也必须返回true）和一致性（当x和y引用的对象信息没有被修改时，多次调用x.equals(y)应该得到同样的返回值），而且对于任何非null值的引用x，x.equals(null)必须返回false。实现高质量的equals方法的诀窍包括：1.<br>使用==操作符检查”参数是否为这个对象的引用”；2. 使用instanceof操作符检查”参数是否为正确的类型”；3.<br>对于类中的关键属性，检查参数传入对象的属性是否与之相匹配；4. 编写完equals方法后，问自己它是否满足对称性、传递性、一致性；5.<br>重写equals时总是要重写hashCode；6.<br>不要将equals方法参数中的Object对象替换为其他的类型，在重写时不要忘掉@Override注解。</p>
+</blockquote>
+<hr>
+<p>##5. 是否可以继承 String<br>String 类是 final 类，不可以被继承。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public final class String implements java.io.Serializable, Comparable&lt;String&gt;, CharSequence</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>继承 String<br>本身就是一个错误的行为，对String类型最好的重用方式是关联关系（Has-A）和依赖关系（UseA）而不是继承关系（Is-A）。</p>
+</blockquote>
+<hr>
+<p>##6. 当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并可返回变化后的结果，那么这里到底是值传递还是引用传递?</p>
+<blockquote>
+<p>答:是值传递。Java编程语言只有值传递参数。当一个对象实例作为一个参数被传递到方法中时，参数的值就是该对象的引用一个副本。指向同一个对象,对象的内容可以在被调用的方法中改变，但对象的引用(不是引用的副本)是永远不会改变的。</p>
+<p>按值传递意味着当将一个参数传递给一个函数时，函数接收的是原始值的一个副本。因此，如果函数修改了该参数，仅改变副本，而原始值保持不变。按引用传递意味着当将一个参数传递给一个函数时，函数接收的是原始值的内存地址，而不是值的副本。因此，如果函数修改了该参数的值，调用代码中的原始值也随之改变。如果函数修改了该参数的地址,调用代码中的原始值不会改变.<br><strong>在 Java应用程序中，当对象引用是传递给方法的一个参数时，您传递的是该引用的一个副本（按值传递），而不是引用本身。</strong></p>
+</blockquote>
+<hr>
+<p>##7.重载（overload）和重写（override）的区别？重载的方法能否根据返回类型进行区分？</p>
+<blockquote>
+<p>方法的重载和重写都是实现多态的方式，区别在于前者实现的是编译时的多态性，而后者实现的是运行时的多态性。重载发生在一个类中，同名的方法如果有不同的参数列表（参数类型不同、参数个数不同或者二者都不同）则视为重载；重写发生在子类与父类之间，重写要求子类被重写方法与父类被重写方法有相同的返回类型，比父类被重写方法更好访问，不能比父类被重写方法声明更多的异常（里氏代换原则）。重载对返回类型没有特殊的要求。</p>
+</blockquote>
+<p><strong>方法重载的规则：</strong></p>
+<blockquote>
+<p>1.方法名一致，参数列表中参数的顺序，类型，个数不同。<br>2.重载与方法的返回值无关，存在于父类和子类，同类中。<br>3.可以抛出不同的异常，可以有不同修饰符。</p>
+</blockquote>
+<p><strong>方法重写的规则：</strong></p>
+<blockquote>
+<p>1.参数列表必须完全与被重写方法的一致，返回类型必须完全与被重写方法的返回类型一致。<br>2.构造方法不能被重写，声明为 final 的方法不能被重写，声明为 static 的方法不能被重写，但是能够被再次声明。<br>3.访问权限不能比父类中被重写的方法的访问权限更低。<br>4.重写的方法能够抛出任何非强制异常（UncheckedException，也叫非运行时异常），无论被重写的方法是否抛出异常。但是，重写的方法不能抛出新的强制性异常，或者比被重写方法声明的更广泛的强制性异常，反之则可以</p>
+</blockquote>
+<hr>
+<p>##8. 为什么函数不能根据返回类型来区分重载？<br>该道题来自华为面试题。<br>因为调用时不能指定类型信息，编译器不知道你要调用哪个函数。<br>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">float max(int a, int b);</span><br><span class="line">int max(int a, int b);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当调用 max(1, 2);时无法确定调用的是哪个，单从这一点上来说，仅返回值类型不同的重载是不应该允许的</p>
+</blockquote>
+<p>再比如对下面这两个方法来说，虽然它们有同样的名字和自变量，但其实是很容易区分的：</p>
+<pre><code>void f() {} 
+int f() {} 
+</code></pre><blockquote>
+<p>若编译器可根据上下文（语境）明确判断出含义，比如在intx=f()中，那么这样做完全没有问题。然而，我们也可能调用一个方法，同时忽略返回值；我们通常把这称为“为它的副作用去调用一个方法”，因为我们关心的不是返回值，而是方法调用的其他效果。所以假如我们像下面这样调用方法：f();Java怎样判断f()的具体调用方式呢？而且别人如何识别并理解代码呢？由于存在这一类的问题，所以不能。<br><strong>函数的返回值只是作为函数运行之后的一个“状态”，他是保持方法的调用者与被调用者进行通信的关键。并不能作为某个方法的“标识”。</strong></p>
+</blockquote>
+<hr>
+<p>##9. char 型变量中能不能存储一个中文汉字，为什么？</p>
+<blockquote>
+<p>char类型可以存储一个中文汉字，因为Java中使用的编码是Unicode（不选择任何特定的编码，直接使用字符在字符集中的编号，这是统一的唯一方法），一个char类型占2个字节（16比特），所以放一个中文是没问题的。<br><strong>补充：</strong>使用 Unicode意味着字符在JVM内部和外部有不同的表现形式，在 JVM 内部都是Unicode，当这个字符被从JVM内部转移到外部时（例如存入文件系统中），需要进行编码转换。所以Java中有字节流和字符流，以及在字符流和字节流之间进行转换的转换流，如InputStreamReader 和 OutputStreamReader，这两个类是字节流和字符流之间的适配器类，承担了编码转换的任务；对于C程序员来说，要完成这样的编码转换恐怕要依赖于union（联合体/共用体）共享内存的特征来实现了。</p>
+</blockquote>
+<h2 id="10-抽象类-abstract-class-和接口-interface-有什么异同？"><a href="#10-抽象类-abstract-class-和接口-interface-有什么异同？" class="headerlink" title="10. 抽象类(abstract class)和接口(interface)有什么异同？"></a>10. 抽象类(abstract class)和接口(interface)有什么异同？</h2><p><strong>不同：</strong></p>
+<blockquote>
+<p><strong>抽象类：</strong><br>1.抽象类中可以定义构造器<br>2.可以有抽象方法和具体方法<br>3.接口中的成员全都是 public 的<br>4.抽象类中可以定义成员变量<br>5.有抽象方法的类必须被声明为抽象类，而抽象类未必要有抽象方法<br>6.抽象类中可以包含静态方法<br>7.一个类只能继承一个抽象类<br><strong>接口：</strong><br>1.接口中不能定义构造器<br>2.方法全部都是抽象方法<br>3.抽象类中的成员可以是 private、默认、protected、public<br>4.接口中定义的成员变量实际上都是常量<br>5.接口中不能有静态方法<br>6.一个类可以实现多个接口</p>
+</blockquote>
+<p><strong>相同：</strong></p>
+<blockquote>
+<p>1.不能够实例化<br>2.可以将抽象类和接口类型作为引用类型<br>3.一个类如果继承了某个抽象类或者实现了某个接口都需要对其中的抽象方法全部进行实现，否则该类仍然需要 被声明为抽象类</p>
+</blockquote>
+<hr>
+<h2 id="11-抽象的-abstract-方法是否可同时是静态的-static-是否可同时是本地方法-native-，是否可同时被-synchronized"><a href="#11-抽象的-abstract-方法是否可同时是静态的-static-是否可同时是本地方法-native-，是否可同时被-synchronized" class="headerlink" title="11.抽象的(abstract)方法是否可同时是静态的(static),是否可同时是本地方法(native)，是否可同时被 synchronized"></a>11.抽象的(abstract)方法是否可同时是静态的(static),是否可同时是本地方法(native)，是否可同时被 synchronized</h2><blockquote>
+<p>都不能。抽象方法需要子类重写，而静态的方法是无法被重写的，因此二者是矛盾的。本地方法是由本地代码（如C代码）实现的方法，而抽象方法是没有实现的，也是矛盾的。synchronized和方法的实现细节有关，抽象方法不涉及实现细节，因此也是相互矛盾的。</p>
+</blockquote>
+<hr>
+<p>##12. 阐述静态变量和实例变量的区别？</p>
+<blockquote>
+<p><strong>静态变量:</strong> 是被static修饰符修饰的变量，也称为类变量，它属于类，不属于类的任何一个对象，一个类不管创建多少个对象，静态变量在内存中有且仅有一个拷贝；<br><strong>实例变量:</strong> 必须依存于某一实例，需要先创建对象然后通过对象才能访问到它。静态变量可以实现让多个对象共享内存。</p>
+</blockquote>
+<hr>
+<p>##13. ==和 equals 的区别？</p>
+<blockquote>
+<p><strong>equals 和== 最大的区别是一个是方法一个是运算符。</strong><br>==：如果比较的对象是基本数据类型，则比较的是数值是否相等；如果比较的是引用数据类型，则比较的是对象的地址值是否相等<br><strong>equals()：</strong>用来比较方法两个对象的内容是否相等。</p>
+</blockquote>
+<p>注意：equals 方法不能用于基本数据类型的变量，如果没有对equals方法进行重写，则比较的是引用类型的变量所指向的对象的地址。</p>
+<hr>
+<p>##14. break 和 continue 的区别？</p>
+<blockquote>
+<p>break 和 continue 都是用来控制循环的语句。 break 用于完全结束一个循环，跳出循环体执行循环后面的语句。<br>continue 用于跳过本次循环，执行下次循环。</p>
+</blockquote>
+<hr>
+<h2 id="15-String-s-”Hello”-s-s-”world-”-这两行代码执行后，原始的-String-对象中的内容到底变了没有？"><a href="#15-String-s-”Hello”-s-s-”world-”-这两行代码执行后，原始的-String-对象中的内容到底变了没有？" class="headerlink" title="15. String s =”Hello”;s=s+”world!”;这两行代码执行后，原始的 String 对象中的内容到底变了没有？"></a>15. String s =”Hello”;s=s+”world!”;这两行代码执行后，原始的 String 对象中的内容到底变了没有？</h2><blockquote>
+<p><strong>没有。</strong>因为 String被设计成不可变(immutable)类，所以它的所有对象都是不可变对象。在这段代码中，s原先指向一个String对象，内容是”Hello”，然后我们对s进行了“+”操作，那么s所指向的那个对象是否发生了改变呢？<br>答案是没有。这时，s不指向原来那个对象了，而指向了另一个String对象，内容为”Helloworld!”，原来那个对象还存在于内存之中，只是 s 这个引用变量不再指向它了.<br>通过上面的说明，我们很容易导出另一个结论，如果经常对字符串进行各种各样的修改，或者说，不可预见的修改，那么使用String来代表字符串的话会引起很大的内存开销。因为String对象建立之后不能再改变，所以对于每一个不同的字符串，都需要一个String对象来表示。这时，应该考虑使用StringBuffer类，它允许修改，而不是每个不同的字符串都要生成一个新的对象。并且，这两种类的对象转换十分容易。同时，我们还可以知道，如果要使用内容相同的字符串，不必每次都 new 一个 String。例如我们要在构造器中对一个名叫 s的 String 引用变量进行初始化，把它设置为初始值，应当这样做</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Demo &#123;</span><br><span class="line"> private String s;</span><br><span class="line"> ...</span><br><span class="line"> s = &quot;Initial Value&quot;;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br><span class="line">而非</span><br><span class="line">s = new String(&quot;Initial Value&quot;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>后者每次都会调用构造器，生成新对象，性能低下且内存开销大，并且没有意义，因为String对象不可改变，所以对于内容相同的字符串，只要一个String对象来表示就可以了。也就说，多次调用上面的构造器创建多个对象，他们的 String类型属性s都指向同一个对象。<br>上面的结论还基于这样一个事实：对于字符串常量，如果内容相同，Java 认为它们代表同一个String对象。而用关键字new调用构造器，总是会创建一个新的对象，无论内容是否相同。 至于为什么要把 String 类设计成不可变类，是它的用途决定的。其实不只String，很多 Java 标准类库中的类都是不可变的。在开发一个系统的时候，我们有时候也需要设计不可变类，来传递一组相关的值，这也是面向对象思想的体现。不可变类有一些优点，比如因为它的对象是只读的，所以多线程并发访问也不会有任何问题。当然也有一些缺点，比如每个不同的状态都要一个对象来代表，可能会造成性能上的问题。所以 Java 标准类库还提供了一个可变版本，即 StringBuffer;</p>
+</blockquote>
+<hr>
+<h2 id="16-StringBuffer和StringBuilder的区别"><a href="#16-StringBuffer和StringBuilder的区别" class="headerlink" title="16.StringBuffer和StringBuilder的区别"></a>16.StringBuffer和StringBuilder的区别</h2><p><strong>区别:</strong></p>
+<blockquote>
+<p>1、StringBuffer 与 StringBuilder中的方法和功能完全是等价的，<br>2、只是StringBuffer中的方法大都采用了synchronized关键字进行修饰，因此是线程安全的，而StringBuilder没有这个修饰，可以被认为是线程不安全的。<br>3、在单线程程序下，StringBuilder效率更快，因为它不需要加锁，不具备多线程安全而StringBuffer则每次都需要判断锁，效率相对更低</p>
+</blockquote>
+<hr>
+<h2 id="17-Object的方法有哪些：比如有wait方法，为什么会有"><a href="#17-Object的方法有哪些：比如有wait方法，为什么会有" class="headerlink" title="17.Object的方法有哪些：比如有wait方法，为什么会有?"></a>17.Object的方法有哪些：比如有wait方法，为什么会有?</h2><blockquote>
+<p>1．clone方法<br>保护方法，实现对象的浅复制，只有实现了Cloneable接口才可以调用该方法，否则抛出CloneNotSupportedException异常。<br>2．getClass方法<br>final方法，获得运行时类型。<br>3．toString方法<br>该方法用得比较多，一般子类都有覆盖。<br>4．finalize方法<br>该方法用于释放资源。因为无法确定该方法什么时候被调用，很少使用。<br>5．equals方法<br>该方法是非常重要的一个方法。一般equals和==是不一样的，但是在Object中两者是一样的。子类一般都要重写这个方法。<br>6．hashCode方法<br>该方法用于哈希查找，重写了equals方法一般都要重写hashCode方法。这个方法在一些具有哈希功能的Collection中用到。<br>一般必须满足obj1.equals(obj2)==true。可以推出obj1.hash- Code()==obj2.hashCode()，但是hashCode相等不一定就满足equals。不过为了提高效率，应该尽量使上面两个条件接近等价。<br>7．wait方法<br>wait方法就是使当前线程等待该对象的锁，当前线程必须是该对象的拥有者，也就是具有该对象的锁。wait()方法一直等待，直到获得锁或者被中断。wait(long timeout)设定一个超时间隔，如果在规定时间内没有获得锁就返回。<br>调用该方法后当前线程进入睡眠状态，直到以下事件发生。<br>（1）其他线程调用了该对象的notify方法。<br>（2）其他线程调用了该对象的notifyAll方法。<br>（3）其他线程调用了interrupt中断该线程。<br>（4）时间间隔到了。<br>此时该线程就可以被调度了，如果是被中断的话就抛出一个InterruptedException异常。<br>8．notify方法<br>该方法唤醒在该对象上等待的某个线程。<br>9．notifyAll方法<br>该方法唤醒在该对象上等待的所有线程<br><strong>注意：wait(),notify(),notifyAll()都必须使用在同步中，因为要对持有监视器(锁)的线程操作。所以要使用在同步中，因为只有同步 才具有锁。</strong></p>
+</blockquote>
+<p><strong>为什么这些操作线程的方法要定义在object类中呢？</strong></p>
+<blockquote>
+<p>简单说：因为synchronized中的这把锁可以是任意对象，所以任意对象都可以调用wait()和notify()；所以wait和notify属于Object。</p>
+<p>专业说：因为这些方法在操作同步线程时，都必须要标识它们操作线程的锁，只有同一个锁上的被等待线程，可以被同一个锁上的notify唤醒，不可以对不同锁中的线程进行唤醒。</p>
+<p>也就是说，等待和唤醒必须是同一个锁。而锁可以是任意对象，所以可以被任意对象调用的方法是定义在object类中。</p>
+</blockquote>
+<hr>
+<h2 id="18-wait和sleep的区别"><a href="#18-wait和sleep的区别" class="headerlink" title="18.wait和sleep的区别?"></a>18.wait和sleep的区别?</h2><p><strong>1、两者的区别</strong></p>
+<ul>
+<li>这两个方法来自不同的类分别是Thread和Object</li>
+<li>最主要是sleep方法没有释放锁，而wait方法释放了锁，使得其他线程可以使用同步控制块或者方法(锁代码块和方法锁)。</li>
+<li>wait，notify和notifyAll只能在同步控制方法或者同步控制块里面使用，而sleep可以在任何地方使用(使用范围)</li>
+<li>sleep必须捕获异常，而wait，notify和notifyAll不需要捕获异常</li>
+<li>sleep方法属于Thread类中方法，表示让一个线程进入睡眠状态，等待一定的时间之后，自动醒来进入到可运行状态，不会马上进入运行状态，因为线程调度机制恢复线程的运行也需要时间，一个线程对象调用了sleep方法之后，并不会释放他所持有的所有对象锁，所以也就不会影响其他进程对象的运行。但在sleep的过程中过程中有可能被其他对象调用它的interrupt(),产生InterruptedException异常，如果你的程序不捕获这个异常，线程就会异常终止，进入TERMINATED状态，如果你的程序捕获了这个异常，那么程序就会继续执行catch语句块(可能还有finally语句块)以及以后的代码。</li>
+<li>注意sleep()方法是一个静态方法，也就是说他只对当前对象有效，通过t.sleep()让t对象进入sleep，这样的做法是错误的，它只会是使当前线程被sleep而不是t线程</li>
+<li>wait属于Object的成员方法，一旦一个对象调用了wait方法，必须要采用notify()和notifyAll()方法唤醒该进程;如果线程拥有某个或某些对象的同步锁，那么在调用了wait()后，这个线程就会释放它持有的所有同步资源，而不限于这个被调用了wait()方法的对象。wait()方法也同样会在wait的过程中有可能被其他对象调用interrupt()方法而产生</li>
+</ul>
+<blockquote>
+<p>如果线程A希望立即结束线程B，则可以对线程B对应的Thread实例调用interrupt方法。如果此刻线程B正在wait/sleep/join，则线程B立刻抛出InterruptedException，在catch(){}中直接return即可安全地结束线程。<br>需要注意的是，InterruptedException是线程自己从内部抛出的，并不是interrupt()方法抛出的。对某一线程调用interrupt()时，如果该线程正在执行普通的代码，那么该线程根本就不会抛出InterruptedException。但是，一旦该线程进入到wait()/sleep()/join()后，就会立刻抛出InterruptedException。</p>
+</blockquote>
+<p>补充两个重要的方法：<strong>yield()和join()</strong></p>
+<blockquote>
+<p>yield()方法是停止当前线程，让同等优先权的线程或更高优先级的线程有执行的机会。如果没有的话，那么yield()方法将不会起作用，并且由可执行状态后马上又被执行。<br>—————···········————-<br>join方法是用于在某一个线程的执行过程中调用另一个线程执行，等到被调用的线程执行结束后，再继续执行当前线程。如：t.join();//主要用于等待t线程运行结束，若无此句，main则会执行完毕，导致结果不可预测。</p>
+</blockquote>
+<hr>
+<h2 id="19-Java关键字之static、final、transient"><a href="#19-Java关键字之static、final、transient" class="headerlink" title="19.Java关键字之static、final、transient"></a>19.Java关键字之static、final、transient</h2><p>  <strong>static关键字</strong></p>
+<pre><code>static关键字，通常用来修饰变量和方法以及静态代码块。被修饰的变量表示为类所有对象所共有的，被修饰的方法表示类的方法。
+掌握好static关键字很重要一点就是，static的作用域是类而非某个具体对象。
+</code></pre><p><strong>final关键字</strong></p>
+<pre><code>final关键字意思就是表示不可变，理解不可变这一点就很容易掌握final关键字的使用了。
+</code></pre><p><strong>transient关键字</strong></p>
+<pre><code>transient关键字在日常开发中并没有像前面两个关键字用的那么频繁，在很少场合下使用。
+transient表示瞬态、临时的，其不能序列化到文件中。
+</code></pre><hr>
+<h2 id="20-foreach实现原理"><a href="#20-foreach实现原理" class="headerlink" title="20.foreach实现原理"></a>20.foreach实现原理</h2><p>Java.util.List实现了java.lang.Iterable接口.<br>jdk api文档中是这样描述Iterable接口的：<strong>实现这个接口允许对象成为 “foreach”语句的目标</strong>。不过咋一看Iterable接口并没啥特别之处，只是定义了一个迭代器而已。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public interface Iterable&lt;T&gt; &#123;  </span><br><span class="line">  </span><br><span class="line">    /** </span><br><span class="line">     * Returns an iterator over a set of elements of type T. </span><br><span class="line">     *  </span><br><span class="line">     * @return an Iterator. </span><br><span class="line">     */  </span><br><span class="line">    Iterator&lt;T&gt; iterator();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>究竟是如何实现foreach的呢，想想可能是编译器做了优化，就看了下最终编译成的字节码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Iterable_eros &#123;  </span><br><span class="line">      </span><br><span class="line">    List&lt;String&gt; strings;  </span><br><span class="line">  </span><br><span class="line">    public void display()&#123;  </span><br><span class="line">        for(String s : strings)&#123;  </span><br><span class="line">            System.out.println(s);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">      </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>相应的字节码为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public void display ()&#123;  </span><br><span class="line">line0    : aload_0    </span><br><span class="line">           getfield  java.util.List my.lang.Iterable_eros.strings  </span><br><span class="line">           invokeinterface  java.util.Iterator java.util.List.iterator() 1  </span><br><span class="line">           astore_2    </span><br><span class="line">           goto  line30  </span><br><span class="line">line13   : aload_2    </span><br><span class="line">           invokeinterface  java.lang.Object java.util.Iterator.next() 1  </span><br><span class="line">           checkcast  java.lang.String  </span><br><span class="line">           astore_1    </span><br><span class="line">line23   : getstatic  java.io.PrintStream java.lang.System.out  </span><br><span class="line">           aload_1    </span><br><span class="line">line27   : invokevirtual  void java.io.PrintStream.println(java.lang.String)  </span><br><span class="line">line30   : aload_2    </span><br><span class="line">           invokeinterface  boolean java.util.Iterator.hasNext() 1  </span><br><span class="line">           ifne  line13  </span><br><span class="line">line39   : return</span><br></pre></td></tr></table></figure></p>
+<p>果然没猜错哈！可以看到，foreach语法最终被编译器转为了对<strong>Iterator.next()</strong>的调用。而作为使用者的我们， jdk并没用向我们暴露这些细节，我们甚至不需要知道Iterator的存在，认识到jdk的强大之处了吧。</p>
+<p>为了证实自己的想法，用Iterator写了个遍历List的方法查看了字节码，果然跟foreach的形式基本一样，当然这是后话~<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public void display()&#123;  </span><br><span class="line">        for(String s : strings)&#123;  </span><br><span class="line">            System.out.println(s);  </span><br><span class="line">        &#125;  </span><br><span class="line">          </span><br><span class="line">        Iterator&lt;String&gt; iterator = strings.iterator();  </span><br><span class="line">        while(iterator.hasNext())&#123;  </span><br><span class="line">            String s = iterator.next();  </span><br><span class="line">            System.out.println(s);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public void display ()&#123;  </span><br><span class="line">line0    : aload_0    </span><br><span class="line">           getfield  java.util.List my.lang.Iterable_eros.strings  </span><br><span class="line">           invokeinterface  java.util.Iterator java.util.List.iterator() 1  </span><br><span class="line">           astore_2    </span><br><span class="line">           goto  line30  </span><br><span class="line">line13   : aload_2    </span><br><span class="line">           invokeinterface  java.lang.Object java.util.Iterator.next() 1  </span><br><span class="line">           checkcast  java.lang.String  </span><br><span class="line">           astore_1    </span><br><span class="line">line23   : getstatic  java.io.PrintStream java.lang.System.out  </span><br><span class="line">           aload_1    </span><br><span class="line">line27   : invokevirtual  void java.io.PrintStream.println(java.lang.String)  </span><br><span class="line">line30   : aload_2    </span><br><span class="line">           invokeinterface  boolean java.util.Iterator.hasNext() 1  </span><br><span class="line">           ifne  line13  </span><br><span class="line">           aload_0    </span><br><span class="line">           getfield  java.util.List my.lang.Iterable_eros.strings  </span><br><span class="line">           invokeinterface  java.util.Iterator java.util.List.iterator() 1  </span><br><span class="line">           astore_1    </span><br><span class="line">line49   : goto  line69  </span><br><span class="line">line52   : aload_1    </span><br><span class="line">           invokeinterface  java.lang.Object java.util.Iterator.next() 1  </span><br><span class="line">           checkcast  java.lang.String  </span><br><span class="line">           astore_2    </span><br><span class="line">line62   : getstatic  java.io.PrintStream java.lang.System.out  </span><br><span class="line">           aload_2    </span><br><span class="line">line66   : invokevirtual  void java.io.PrintStream.println(java.lang.String)  </span><br><span class="line">line69   : aload_1    </span><br><span class="line">           invokeinterface  boolean java.util.Iterator.hasNext() 1  </span><br><span class="line">           ifne  line52  </span><br><span class="line">line78   : return</span><br></pre></td></tr></table></figure>
+<p>这边还发现一个比较有趣的现象：在取Iterator.next()之后并在把该值load进内容栈之前，编译器调用了checkcast  java.lang.String方法来进行类型安全检查，jdk应该是采用这个来检测并抛出ClassCastException的。</p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/path/to/wechat-reward-image" alt="侯尚功 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/path/to/alipay-reward-image" alt="侯尚功 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/基础/" rel="tag"># 基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/多线程之线程并发库/" rel="next" title="多线程之线程并发库">
+                <i class="fa fa-chevron-left"></i> 多线程之线程并发库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/注解/" rel="prev" title="注解">
+                注解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          ﻿
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/upload/logo.jpg"
+                alt="侯尚功" />
+            
+              <p class="site-author-name" itemprop="name">侯尚功</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/housg.github.io" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://youtobe.com/" title="Youtube" target="_blank">Youtube</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Java-有没有-goto-语句？"><span class="nav-number">1.</span> <span class="nav-text">1. Java 有没有 goto 语句？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-抽象类-abstract-class-和接口-interface-有什么异同？"><span class="nav-number">2.</span> <span class="nav-text">10. 抽象类(abstract class)和接口(interface)有什么异同？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-抽象的-abstract-方法是否可同时是静态的-static-是否可同时是本地方法-native-，是否可同时被-synchronized"><span class="nav-number">3.</span> <span class="nav-text">11.抽象的(abstract)方法是否可同时是静态的(static),是否可同时是本地方法(native)，是否可同时被 synchronized</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-String-s-”Hello”-s-s-”world-”-这两行代码执行后，原始的-String-对象中的内容到底变了没有？"><span class="nav-number">4.</span> <span class="nav-text">15. String s =”Hello”;s=s+”world!”;这两行代码执行后，原始的 String 对象中的内容到底变了没有？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-StringBuffer和StringBuilder的区别"><span class="nav-number">5.</span> <span class="nav-text">16.StringBuffer和StringBuilder的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-Object的方法有哪些：比如有wait方法，为什么会有"><span class="nav-number">6.</span> <span class="nav-text">17.Object的方法有哪些：比如有wait方法，为什么会有?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-wait和sleep的区别"><span class="nav-number">7.</span> <span class="nav-text">18.wait和sleep的区别?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-Java关键字之static、final、transient"><span class="nav-number">8.</span> <span class="nav-text">19.Java关键字之static、final、transient</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-foreach实现原理"><span class="nav-number">9.</span> <span class="nav-text">20.foreach实现原理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PoweredBy—侯尚功</span>
+
+  
+</div>
+<span id="busuanzi_container_site_uv">
+  总访客数:<span id="busuanzi_value_site_uv"></span>人次 |
+</span>
+
+  <div class="powered-by"> 个人专属</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">博客 &mdash; Housg v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytjbOEBt';
+      var conf = '358123117431784fd19b7a2e754c43af';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("NC8RpkpGHJLmMzxCiy53irFt-gzGzoHsz", "chHnPq1K7mtAWfNKxiXrPDQq");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+</body>
+</html>
