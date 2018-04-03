@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="java,poi," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hou-Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="POI使用总结 一、 POI简介Apache POI是Apache软件基金会的开放源码函式库，POI提供API给Java程序对Microsoft Office格式档案读和写的功能。 二、 HSSF概况HSSF 是Horrible SpreadSheet Format的缩写，通过HSSF，你可以用纯Java代码来读取、写入、修改Excel文件。HSSF 为读取操作提供了两类API：usermodel">
+<meta name="keywords" content="java,poi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="POI导入导出">
+<meta property="og:url" content="http://yoursite.com/POI使用总结/index.html">
 <meta property="og:site_name" content="Hou-Blog">
+<meta property="og:description" content="POI使用总结 一、 POI简介Apache POI是Apache软件基金会的开放源码函式库，POI提供API给Java程序对Microsoft Office格式档案读和写的功能。 二、 HSSF概况HSSF 是Horrible SpreadSheet Format的缩写，通过HSSF，你可以用纯Java代码来读取、写入、修改Excel文件。HSSF 为读取操作提供了两类API：usermodel">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-03T12:59:17.046Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hou-Blog">
+<meta name="twitter:title" content="POI导入导出">
+<meta name="twitter:description" content="POI使用总结 一、 POI简介Apache POI是Apache软件基金会的开放源码函式库，POI提供API给Java程序对Microsoft Office格式档案读和写的功能。 二、 HSSF概况HSSF 是Horrible SpreadSheet Format的缩写，通过HSSF，你可以用纯Java代码来读取、写入、修改Excel文件。HSSF 为读取操作提供了两类API：usermodel">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/POI使用总结/"/>
 
 
 
 
 
-  <title>Hou-Blog</title>
+  <title>POI导入导出 | Hou-Blog</title>
   
 
 
@@ -150,8 +155,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -278,9 +282,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -293,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/JSP技术/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/POI使用总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="侯尚功">
@@ -310,9 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/JSP技术/" itemprop="url">JSP技术</a></h1>
+          <h1 class="post-title" itemprop="name headline">POI导入导出</h1>
         
 
         <div class="post-meta">
@@ -324,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-20T20:33:22+08:00">
-                2017-03-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-17T08:33:45+08:00">
+                2016-08-17
               </time>
             
 
@@ -344,8 +346,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/JSP技术/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count cy_cmt_count" data-xid="JSP技术/" itemprop="commentsCount" ></span>
+                <a href="/POI使用总结/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="POI使用总结/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -353,7 +355,7 @@
 
           
           
-             <span id="/JSP技术/" class="leancloud_visitors" data-flag-title="JSP技术">
+             <span id="/POI使用总结/" class="leancloud_visitors" data-flag-title="POI导入导出">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -387,38 +389,221 @@
       
 
       
-        
-          
-          
-Contents
+        <h1 id="POI使用总结"><a href="#POI使用总结" class="headerlink" title="POI使用总结"></a>POI使用总结</h1><hr>
+<h2 id="一、-POI简介"><a href="#一、-POI简介" class="headerlink" title="一、 POI简介"></a>一、 POI简介</h2><pre><code>Apache POI是Apache软件基金会的开放源码函式库，POI提供API给Java程序对Microsoft Office格式档案读和写的功能。
+</code></pre><h2 id="二、-HSSF概况"><a href="#二、-HSSF概况" class="headerlink" title="二、 HSSF概况"></a>二、 HSSF概况</h2><pre><code>HSSF 是Horrible SpreadSheet Format的缩写，通过HSSF，你可以用纯Java代码来读取、写入、修改Excel文件。HSSF 为读取操作提供了两类API：usermodel和eventusermodel，即“用户模型”和“事件-用户模型”。
+</code></pre><h2 id="三、-POI-EXCEL文档结构类"><a href="#三、-POI-EXCEL文档结构类" class="headerlink" title="三、 POI EXCEL文档结构类"></a>三、 POI EXCEL文档结构类</h2><pre><code>HSSFWorkbook excel文档对象
 
-javaweb入门笔记(6)-JSP技术
-调用和运行原理
-JSP语法
-九大隐式对象
-out隐式对象
-pageContext对象
+HSSFSheet excel的sheet HSSFRow excel的行
 
+HSSFCell excel的单元格 HSSFFont excel字体
 
-jsp映射和查错
-jsp与JavaBean
+HSSFName 名称 HSSFDataFormat 日期格式
 
+HSSFHeader sheet头
 
+HSSFFooter sheet尾
 
+HSSFCellStyle cell样式
 
-JSP：Java Server Pages，一种动态web资源的开发技术
-API文档
+HSSFDateUtil 日期
 
-JSP
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/JSP技术/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+HSSFPrintSetup 打印
+
+HSSFErrorConstants 错误信息表
+</code></pre><h2 id="四、-EXCEL常用操作方法"><a href="#四、-EXCEL常用操作方法" class="headerlink" title="四、 EXCEL常用操作方法"></a>四、 EXCEL常用操作方法</h2><p>  1、 得到Excel常用对象<br>[c-sharp] view plaincopy</p>
+<pre><code>POIFSFileSystem fs=newPOIFSFileSystem(new FileInputStream(&quot;d:/test.xls&quot;));   
+//得到Excel工作簿对象   
+HSSFWorkbook wb = new HSSFWorkbook(fs);  
+//得到Excel工作表对象   
+HSSFSheet sheet = wb.getSheetAt(0);   
+//得到Excel工作表的行   
+HSSFRow row = sheet.getRow(i);  
+//得到Excel工作表指定行的单元格   
+HSSFCell cell = row.getCell((short) j);  
+cellStyle = cell.getCellStyle();//得到单元格样式  
+</code></pre><p> 2、建立Excel常用对象<br>[c-sharp] view plaincopy</p>
+<pre><code>HSSFWorkbook wb = new HSSFWorkbook();//创建Excel工作簿对象  
+HSSFSheet sheet = wb.createSheet(&quot;new sheet&quot;);//创建Excel工作表对象    
+HSSFRow row = sheet.createRow((short)0); //创建Excel工作表的行  
+cellStyle = wb.createCellStyle();//创建单元格样式  
+row.createCell((short)0).setCellStyle(cellStyle); //创建Excel工作表指定行的单元格  
+row.createCell((short)0).setCellValue(1); //设置Excel工作表的值  
+</code></pre><p>3、设置sheet名称和单元格内容<br>[c-sharp] view plaincopy</p>
+<pre><code>wb.setSheetName(1, &quot;第一张工作表&quot;,HSSFCell.ENCODING_UTF_16);          
+cell.setEncoding((short) 1);      
+cell.setCellValue(&quot;单元格内容&quot;);  
+</code></pre><p>4、取得sheet的数目<br>[c-sharp] view plaincopy</p>
+<pre><code>wb.getNumberOfSheets()   
+</code></pre><p>5、  根据index取得sheet对象<br>[c-sharp] view plaincopy</p>
+<pre><code>HSSFSheet sheet = wb.getSheetAt(0);  
+</code></pre><p>6、取得有效的行数<br>[c-sharp] view plaincopy</p>
+<pre><code>int rowcount = sheet.getLastRowNum();  
+</code></pre><p>7、取得一行的有效单元格个数<br>[c-sharp] view plaincopy</p>
+<pre><code>row.getLastCellNum();    
+</code></pre><p>8、单元格值类型读写</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>cell.setCellType(HSSFCell.CELL_TYPE_STRING); //设置单元格为STRING类型  
+cell.getNumericCellValue();//读取为数值类型的单元格内容  
+</code></pre><p>9、设置列宽、行高</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>sheet.setColumnWidth((short)column,(short)width);      
+row.setHeight((short)height);    
+</code></pre><p>10、添加区域，合并单元格</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>Region region = new Region((short)rowFrom,(short)columnFrom,(short)rowTo  
+,(short)columnTo);//合并从第rowFrom行columnFrom列  
+sheet.addMergedRegion(region);// 到rowTo行columnTo的区域     
+//得到所有区域      
+sheet.getNumMergedRegions()   
+</code></pre><p>11、保存Excel文件</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>FileOutputStream fileOut = new FileOutputStream(path);   
+wb.write(fileOut);   
+</code></pre><p>12、根据单元格不同属性返回字符串数值</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>public String getCellStringValue(HSSFCell cell) {      
+        String cellValue = &quot;&quot;;      
+        switch (cell.getCellType()) {      
+        case HSSFCell.CELL_TYPE_STRING://字符串类型  
+            cellValue = cell.getStringCellValue();      
+            if(cellValue.trim().equals(&quot;&quot;)||cellValue.trim().length()&lt;=0)      
+                cellValue=&quot; &quot;;      
+            break;      
+        case HSSFCell.CELL_TYPE_NUMERIC: //数值类型  
+            cellValue = String.valueOf(cell.getNumericCellValue());      
+            break;      
+        case HSSFCell.CELL_TYPE_FORMULA: //公式  
+            cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);      
+            cellValue = String.valueOf(cell.getNumericCellValue());      
+            break;      
+        case HSSFCell.CELL_TYPE_BLANK:      
+            cellValue=&quot; &quot;;      
+            break;      
+        case HSSFCell.CELL_TYPE_BOOLEAN:      
+            break;      
+        case HSSFCell.CELL_TYPE_ERROR:      
+            break;      
+        default:      
+            break;      
+        }      
+        return cellValue;      
+    }     
+</code></pre><p>13、常用单元格边框格式</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFCellStyle style = wb.createCellStyle();      
+style.setBorderBottom(HSSFCellStyle.BORDER_DOTTED);//下边框       
+style.setBorderLeft(HSSFCellStyle.BORDER_DOTTED);//左边框       
+style.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框       
+style.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框    
+</code></pre><p>14、设置字体和内容位置</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFFont f  = wb.createFont();      
+f.setFontHeightInPoints((short) 11);//字号      
+f.setBoldweight(HSSFFont.BOLDWEIGHT_NORMAL);//加粗      
+style.setFont(f);      
+style.setAlignment(HSSFCellStyle.ALIGN_CENTER);//左右居中      
+style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);//上下居中      
+style.setRotation(short rotation);//单元格内容的旋转的角度      
+HSSFDataFormat df = wb.createDataFormat();      
+style1.setDataFormat(df.getFormat(&quot;0.00%&quot;));//设置单元格数据格式      
+cell.setCellFormula(string);//给单元格设公式      
+style.setRotation(short rotation);//单元格内容的旋转的角度   
+</code></pre><p>15、插入图片</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>//先把读进来的图片放到一个ByteArrayOutputStream中，以便产生ByteArray      
+      ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();      
+      BufferedImage bufferImg = ImageIO.read(new File(&quot;ok.jpg&quot;));      
+      ImageIO.write(bufferImg,&quot;jpg&quot;,byteArrayOut);      
+//读进一个excel模版      
+FileInputStream fos = new FileInputStream(filePathName+&quot;/stencil.xlt&quot;);       
+fs = new POIFSFileSystem(fos);      
+//创建一个工作薄      
+HSSFWorkbook wb = new HSSFWorkbook(fs);      
+HSSFSheet sheet = wb.getSheetAt(0);      
+HSSFPatriarch patriarch = sheet.createDrawingPatriarch();      
+HSSFClientAnchor anchor = new HSSFClientAnchor(0,0,1023,255,(short) 0,0,(short)10,10);           
+patriarch.createPicture(anchor , wb.addPicture(byteArrayOut.toByteArray(),HSSFWorkbook.PICTURE_TYPE_JPEG));    
+</code></pre><p>16、调整工作表位置</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFWorkbook wb = new HSSFWorkbook();     
+HSSFSheet sheet = wb.createSheet(&quot;format sheet&quot;);     
+HSSFPrintSetup ps = sheet.getPrintSetup();     
+sheet.setAutobreaks(true);     
+ps.setFitHeight((short)1);     
+ps.setFitWidth((short)1);   
+</code></pre><p>17、设置打印区域</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFSheet sheet = wb.createSheet(&quot;Sheet1&quot;);     
+wb.setPrintArea(0, &quot;$A$1:$C$2&quot;);    
+</code></pre><p>18、标注脚注</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFSheet sheet = wb.createSheet(&quot;format sheet&quot;);     
+HSSFFooter footer = sheet.getFooter()     
+footer.setRight( &quot;Page &quot; + HSSFFooter.page() + &quot; of &quot; + HSSFFooter.numPages() );   
+</code></pre><p>19、在工作单中清空行数据，调整行位置</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFWorkbook wb = new HSSFWorkbook();     
+HSSFSheet sheet = wb.createSheet(&quot;row sheet&quot;);     
+// Create various cells and rows for spreadsheet.     
+// Shift rows 6 - 11 on the spreadsheet to the top (rows 0 - 5)     
+sheet.shiftRows(5, 10, -5);    
+</code></pre><p>20、选中指定的工作表</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFSheet sheet = wb.createSheet(&quot;row sheet&quot;);     
+heet.setSelected(true);     
+</code></pre><p>21、工作表的放大缩小</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFSheet sheet1 = wb.createSheet(&quot;new sheet&quot;);     
+sheet1.setZoom(1,2);   // 50 percent magnification    
+</code></pre><p>22、头注和脚注</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFSheet sheet = wb.createSheet(&quot;new sheet&quot;);     
+HSSFHeader header = sheet.getHeader();     
+header.setCenter(&quot;Center Header&quot;);     
+header.setLeft(&quot;Left Header&quot;);     
+header.setRight(HSSFHeader.font(&quot;Stencil-Normal&quot;, &quot;Italic&quot;) +     
+HSSFHeader.fontSize((short) 16) + &quot;Right w/ Stencil-Normal Italic font and size 16&quot;);  
+</code></pre><p>23、自定义颜色</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFCellStyle style = wb.createCellStyle();     
+style.setFillForegroundColor(HSSFColor.LIME.index);     
+style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);     
+HSSFFont font = wb.createFont();     
+font.setColor(HSSFColor.RED.index);     
+style.setFont(font);     
+cell.setCellStyle(style);     
+</code></pre><p>24、填充和颜色设置</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFCellStyle style = wb.createCellStyle();     
+style.setFillBackgroundColor(HSSFColor.AQUA.index);     
+style.setFillPattern(HSSFCellStyle.BIG_SPOTS);     
+HSSFCell cell = row.createCell((short) 1);     
+cell.setCellValue(&quot;X&quot;);     
+style = wb.createCellStyle();     
+style.setFillForegroundColor(HSSFColor.ORANGE.index);     
+style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);     
+cell.setCellStyle(style);   
+</code></pre><p>25、强行刷新单元格公式</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFFormulaEvaluator eval=new HSSFFormulaEvaluator((HSSFWorkbook) wb);    
+private static void updateFormula(Workbook wb,Sheet s,int row){     
+        Row r=s.getRow(row);     
+        Cell c=null;     
+        FormulaEcaluator eval=null;     
+        if(wb instanceof HSSFWorkbook)     
+            eval=new HSSFFormulaEvaluator((HSSFWorkbook) wb);     
+        else if(wb instanceof XSSFWorkbook)     
+            eval=new XSSFFormulaEvaluator((XSSFWorkbook) wb);     
+        for(int i=r.getFirstCellNum();i&lt;r.getLastCellNum();i++){     
+            c=r.getCell(i);     
+            if(c.getCellType()==Cell.CELL_TYPE_FORMULA)     
+                eval.evaluateFormulaCell(c);     
+        }     
+    }    
+</code></pre><p>说明：FormulaEvaluator提供了evaluateFormulaCell(Cell cell)方法，计算公式保存结果，但不改变公式。而evaluateInCell(Cell cell) 方法是计算公式，并将原公式替换为计算结果，也就是说该单元格的类型不在是Cell.CELL_TYPE_FORMULA而是Cell.CELL_TYPE_NUMBERIC。HSSFFormulaEvaluator提供了静态方法evaluateAllFormu</p>
+<p>laCells(HSSFWorkbook wb) ，计算一个Excel文件的所有公式，用起来很方便。</p>
+
       
     </div>
     
@@ -428,367 +613,76 @@ JSP
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/path/to/wechat-reward-image" alt="侯尚功 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/path/to/alipay-reward-image" alt="侯尚功 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/cookie和session/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="侯尚功">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/upload/logo.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hou-Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/cookie和session/" itemprop="url">cookie和session</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-17T20:33:22+08:00">
-                2017-03-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/java/" rel="tag"># java</a>
           
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/cookie和session/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count cy_cmt_count" data-xid="cookie和session/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
+            <a href="/tags/poi/" rel="tag"># poi</a>
           
-
-          
-          
-             <span id="/cookie和session/" class="leancloud_visitors" data-flag-title="cookie和session">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-		   
-
-          
-
-          
-		  
-		  
-	
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          
-          
-Contents
-
-javaweb入门笔记(5)-cookie和session
-cookie
-session
-实现原理
-应用案例
-
-
-三个域对象
-
-
-
-
-Cookie是客户端技术；Session是服务器端技术。
-API:
-
-
-javax.servlet.http:Class Cookie
-java
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/cookie和session/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/泛型/" rel="next" title="泛型">
+                <i class="fa fa-chevron-left"></i> 泛型
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/request和response/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="侯尚功">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/upload/logo.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hou-Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/request和response/" itemprop="url">request和response</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <div class="post-nav-prev post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-16T20:33:22+08:00">
-                2017-03-16
-              </time>
+              <a href="/代理/" rel="prev" title="代理">
+                代理 <i class="fa fa-chevron-right"></i>
+              </a>
             
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/request和response/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count cy_cmt_count" data-xid="request和response/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-             <span id="/request和response/" class="leancloud_visitors" data-flag-title="request和response">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-		   
-
-          
-
-          
-		  
-		  
-	
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-          
-Contents
-
-javaweb入门笔记(4)-request和response
-response
-输出数据
-文件下载
-随机图片
-刷新和缓存
-请求重定向
-
-
-request
-中文乱码
-请求转发
-地址的写法
-防盗链
-
-
-
-
-
-
-API:
-
-
-Interface HttpServletRespons
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/request和response/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -798,14 +692,11 @@ Interface HttpServletRespons
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -813,6 +704,15 @@ Interface HttpServletRespons
 
 
           ﻿
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
 
 
 
@@ -835,8 +735,17 @@ Interface HttpServletRespons
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -919,6 +828,22 @@ Interface HttpServletRespons
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#POI使用总结"><span class="nav-number">1.</span> <span class="nav-text">POI使用总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、-POI简介"><span class="nav-number">1.1.</span> <span class="nav-text">一、 POI简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、-HSSF概况"><span class="nav-number">1.2.</span> <span class="nav-text">二、 HSSF概况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、-POI-EXCEL文档结构类"><span class="nav-number">1.3.</span> <span class="nav-text">三、 POI EXCEL文档结构类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、-EXCEL常用操作方法"><span class="nav-number">1.4.</span> <span class="nav-text">四、 EXCEL常用操作方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1070,6 +995,10 @@ Interface HttpServletRespons
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
@@ -1104,7 +1033,18 @@ Interface HttpServletRespons
 
 
   
-    <script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytjbOEBt"></script>
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytjbOEBt';
+      var conf = '358123117431784fd19b7a2e754c43af';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
   
 
 

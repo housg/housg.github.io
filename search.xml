@@ -1613,6 +1613,236 @@ transient表示瞬态、临时的，其不能序列化到文件中。
     </entry>
     
     <entry>
+      <title><![CDATA[POI导入导出]]></title>
+      <url>/POI%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</url>
+      <content type="html"><![CDATA[<h1 id="POI使用总结"><a href="#POI使用总结" class="headerlink" title="POI使用总结"></a>POI使用总结</h1><hr>
+<h2 id="一、-POI简介"><a href="#一、-POI简介" class="headerlink" title="一、 POI简介"></a>一、 POI简介</h2><pre><code>Apache POI是Apache软件基金会的开放源码函式库，POI提供API给Java程序对Microsoft Office格式档案读和写的功能。
+</code></pre><h2 id="二、-HSSF概况"><a href="#二、-HSSF概况" class="headerlink" title="二、 HSSF概况"></a>二、 HSSF概况</h2><pre><code>HSSF 是Horrible SpreadSheet Format的缩写，通过HSSF，你可以用纯Java代码来读取、写入、修改Excel文件。HSSF 为读取操作提供了两类API：usermodel和eventusermodel，即“用户模型”和“事件-用户模型”。
+</code></pre><h2 id="三、-POI-EXCEL文档结构类"><a href="#三、-POI-EXCEL文档结构类" class="headerlink" title="三、 POI EXCEL文档结构类"></a>三、 POI EXCEL文档结构类</h2><pre><code>HSSFWorkbook excel文档对象
+
+HSSFSheet excel的sheet HSSFRow excel的行
+
+HSSFCell excel的单元格 HSSFFont excel字体
+
+HSSFName 名称 HSSFDataFormat 日期格式
+
+HSSFHeader sheet头
+
+HSSFFooter sheet尾
+
+HSSFCellStyle cell样式
+
+HSSFDateUtil 日期
+
+HSSFPrintSetup 打印
+
+HSSFErrorConstants 错误信息表
+</code></pre><h2 id="四、-EXCEL常用操作方法"><a href="#四、-EXCEL常用操作方法" class="headerlink" title="四、 EXCEL常用操作方法"></a>四、 EXCEL常用操作方法</h2><p>  1、 得到Excel常用对象<br>[c-sharp] view plaincopy</p>
+<pre><code>POIFSFileSystem fs=newPOIFSFileSystem(new FileInputStream(&quot;d:/test.xls&quot;));   
+//得到Excel工作簿对象   
+HSSFWorkbook wb = new HSSFWorkbook(fs);  
+//得到Excel工作表对象   
+HSSFSheet sheet = wb.getSheetAt(0);   
+//得到Excel工作表的行   
+HSSFRow row = sheet.getRow(i);  
+//得到Excel工作表指定行的单元格   
+HSSFCell cell = row.getCell((short) j);  
+cellStyle = cell.getCellStyle();//得到单元格样式  
+</code></pre><p> 2、建立Excel常用对象<br>[c-sharp] view plaincopy</p>
+<pre><code>HSSFWorkbook wb = new HSSFWorkbook();//创建Excel工作簿对象  
+HSSFSheet sheet = wb.createSheet(&quot;new sheet&quot;);//创建Excel工作表对象    
+HSSFRow row = sheet.createRow((short)0); //创建Excel工作表的行  
+cellStyle = wb.createCellStyle();//创建单元格样式  
+row.createCell((short)0).setCellStyle(cellStyle); //创建Excel工作表指定行的单元格  
+row.createCell((short)0).setCellValue(1); //设置Excel工作表的值  
+</code></pre><p>3、设置sheet名称和单元格内容<br>[c-sharp] view plaincopy</p>
+<pre><code>wb.setSheetName(1, &quot;第一张工作表&quot;,HSSFCell.ENCODING_UTF_16);          
+cell.setEncoding((short) 1);      
+cell.setCellValue(&quot;单元格内容&quot;);  
+</code></pre><p>4、取得sheet的数目<br>[c-sharp] view plaincopy</p>
+<pre><code>wb.getNumberOfSheets()   
+</code></pre><p>5、  根据index取得sheet对象<br>[c-sharp] view plaincopy</p>
+<pre><code>HSSFSheet sheet = wb.getSheetAt(0);  
+</code></pre><p>6、取得有效的行数<br>[c-sharp] view plaincopy</p>
+<pre><code>int rowcount = sheet.getLastRowNum();  
+</code></pre><p>7、取得一行的有效单元格个数<br>[c-sharp] view plaincopy</p>
+<pre><code>row.getLastCellNum();    
+</code></pre><p>8、单元格值类型读写</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>cell.setCellType(HSSFCell.CELL_TYPE_STRING); //设置单元格为STRING类型  
+cell.getNumericCellValue();//读取为数值类型的单元格内容  
+</code></pre><p>9、设置列宽、行高</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>sheet.setColumnWidth((short)column,(short)width);      
+row.setHeight((short)height);    
+</code></pre><p>10、添加区域，合并单元格</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>Region region = new Region((short)rowFrom,(short)columnFrom,(short)rowTo  
+,(short)columnTo);//合并从第rowFrom行columnFrom列  
+sheet.addMergedRegion(region);// 到rowTo行columnTo的区域     
+//得到所有区域      
+sheet.getNumMergedRegions()   
+</code></pre><p>11、保存Excel文件</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>FileOutputStream fileOut = new FileOutputStream(path);   
+wb.write(fileOut);   
+</code></pre><p>12、根据单元格不同属性返回字符串数值</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>public String getCellStringValue(HSSFCell cell) {      
+        String cellValue = &quot;&quot;;      
+        switch (cell.getCellType()) {      
+        case HSSFCell.CELL_TYPE_STRING://字符串类型  
+            cellValue = cell.getStringCellValue();      
+            if(cellValue.trim().equals(&quot;&quot;)||cellValue.trim().length()&lt;=0)      
+                cellValue=&quot; &quot;;      
+            break;      
+        case HSSFCell.CELL_TYPE_NUMERIC: //数值类型  
+            cellValue = String.valueOf(cell.getNumericCellValue());      
+            break;      
+        case HSSFCell.CELL_TYPE_FORMULA: //公式  
+            cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);      
+            cellValue = String.valueOf(cell.getNumericCellValue());      
+            break;      
+        case HSSFCell.CELL_TYPE_BLANK:      
+            cellValue=&quot; &quot;;      
+            break;      
+        case HSSFCell.CELL_TYPE_BOOLEAN:      
+            break;      
+        case HSSFCell.CELL_TYPE_ERROR:      
+            break;      
+        default:      
+            break;      
+        }      
+        return cellValue;      
+    }     
+</code></pre><p>13、常用单元格边框格式</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFCellStyle style = wb.createCellStyle();      
+style.setBorderBottom(HSSFCellStyle.BORDER_DOTTED);//下边框       
+style.setBorderLeft(HSSFCellStyle.BORDER_DOTTED);//左边框       
+style.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框       
+style.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框    
+</code></pre><p>14、设置字体和内容位置</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFFont f  = wb.createFont();      
+f.setFontHeightInPoints((short) 11);//字号      
+f.setBoldweight(HSSFFont.BOLDWEIGHT_NORMAL);//加粗      
+style.setFont(f);      
+style.setAlignment(HSSFCellStyle.ALIGN_CENTER);//左右居中      
+style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);//上下居中      
+style.setRotation(short rotation);//单元格内容的旋转的角度      
+HSSFDataFormat df = wb.createDataFormat();      
+style1.setDataFormat(df.getFormat(&quot;0.00%&quot;));//设置单元格数据格式      
+cell.setCellFormula(string);//给单元格设公式      
+style.setRotation(short rotation);//单元格内容的旋转的角度   
+</code></pre><p>15、插入图片</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>//先把读进来的图片放到一个ByteArrayOutputStream中，以便产生ByteArray      
+      ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();      
+      BufferedImage bufferImg = ImageIO.read(new File(&quot;ok.jpg&quot;));      
+      ImageIO.write(bufferImg,&quot;jpg&quot;,byteArrayOut);      
+//读进一个excel模版      
+FileInputStream fos = new FileInputStream(filePathName+&quot;/stencil.xlt&quot;);       
+fs = new POIFSFileSystem(fos);      
+//创建一个工作薄      
+HSSFWorkbook wb = new HSSFWorkbook(fs);      
+HSSFSheet sheet = wb.getSheetAt(0);      
+HSSFPatriarch patriarch = sheet.createDrawingPatriarch();      
+HSSFClientAnchor anchor = new HSSFClientAnchor(0,0,1023,255,(short) 0,0,(short)10,10);           
+patriarch.createPicture(anchor , wb.addPicture(byteArrayOut.toByteArray(),HSSFWorkbook.PICTURE_TYPE_JPEG));    
+</code></pre><p>16、调整工作表位置</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFWorkbook wb = new HSSFWorkbook();     
+HSSFSheet sheet = wb.createSheet(&quot;format sheet&quot;);     
+HSSFPrintSetup ps = sheet.getPrintSetup();     
+sheet.setAutobreaks(true);     
+ps.setFitHeight((short)1);     
+ps.setFitWidth((short)1);   
+</code></pre><p>17、设置打印区域</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFSheet sheet = wb.createSheet(&quot;Sheet1&quot;);     
+wb.setPrintArea(0, &quot;$A$1:$C$2&quot;);    
+</code></pre><p>18、标注脚注</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFSheet sheet = wb.createSheet(&quot;format sheet&quot;);     
+HSSFFooter footer = sheet.getFooter()     
+footer.setRight( &quot;Page &quot; + HSSFFooter.page() + &quot; of &quot; + HSSFFooter.numPages() );   
+</code></pre><p>19、在工作单中清空行数据，调整行位置</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFWorkbook wb = new HSSFWorkbook();     
+HSSFSheet sheet = wb.createSheet(&quot;row sheet&quot;);     
+// Create various cells and rows for spreadsheet.     
+// Shift rows 6 - 11 on the spreadsheet to the top (rows 0 - 5)     
+sheet.shiftRows(5, 10, -5);    
+</code></pre><p>20、选中指定的工作表</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFSheet sheet = wb.createSheet(&quot;row sheet&quot;);     
+heet.setSelected(true);     
+</code></pre><p>21、工作表的放大缩小</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFSheet sheet1 = wb.createSheet(&quot;new sheet&quot;);     
+sheet1.setZoom(1,2);   // 50 percent magnification    
+</code></pre><p>22、头注和脚注</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFSheet sheet = wb.createSheet(&quot;new sheet&quot;);     
+HSSFHeader header = sheet.getHeader();     
+header.setCenter(&quot;Center Header&quot;);     
+header.setLeft(&quot;Left Header&quot;);     
+header.setRight(HSSFHeader.font(&quot;Stencil-Normal&quot;, &quot;Italic&quot;) +     
+HSSFHeader.fontSize((short) 16) + &quot;Right w/ Stencil-Normal Italic font and size 16&quot;);  
+</code></pre><p>23、自定义颜色</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFCellStyle style = wb.createCellStyle();     
+style.setFillForegroundColor(HSSFColor.LIME.index);     
+style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);     
+HSSFFont font = wb.createFont();     
+font.setColor(HSSFColor.RED.index);     
+style.setFont(font);     
+cell.setCellStyle(style);     
+</code></pre><p>24、填充和颜色设置</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFCellStyle style = wb.createCellStyle();     
+style.setFillBackgroundColor(HSSFColor.AQUA.index);     
+style.setFillPattern(HSSFCellStyle.BIG_SPOTS);     
+HSSFCell cell = row.createCell((short) 1);     
+cell.setCellValue(&quot;X&quot;);     
+style = wb.createCellStyle();     
+style.setFillForegroundColor(HSSFColor.ORANGE.index);     
+style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);     
+cell.setCellStyle(style);   
+</code></pre><p>25、强行刷新单元格公式</p>
+<p>[c-sharp] view plaincopy</p>
+<pre><code>HSSFFormulaEvaluator eval=new HSSFFormulaEvaluator((HSSFWorkbook) wb);    
+private static void updateFormula(Workbook wb,Sheet s,int row){     
+        Row r=s.getRow(row);     
+        Cell c=null;     
+        FormulaEcaluator eval=null;     
+        if(wb instanceof HSSFWorkbook)     
+            eval=new HSSFFormulaEvaluator((HSSFWorkbook) wb);     
+        else if(wb instanceof XSSFWorkbook)     
+            eval=new XSSFFormulaEvaluator((XSSFWorkbook) wb);     
+        for(int i=r.getFirstCellNum();i&lt;r.getLastCellNum();i++){     
+            c=r.getCell(i);     
+            if(c.getCellType()==Cell.CELL_TYPE_FORMULA)     
+                eval.evaluateFormulaCell(c);     
+        }     
+    }    
+</code></pre><p>说明：FormulaEvaluator提供了evaluateFormulaCell(Cell cell)方法，计算公式保存结果，但不改变公式。而evaluateInCell(Cell cell) 方法是计算公式，并将原公式替换为计算结果，也就是说该单元格的类型不在是Cell.CELL_TYPE_FORMULA而是Cell.CELL_TYPE_NUMBERIC。HSSFFormulaEvaluator提供了静态方法evaluateAllFormu</p>
+<p>laCells(HSSFWorkbook wb) ，计算一个Excel文件的所有公式，用起来很方便。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> poi </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[泛型]]></title>
       <url>/%E6%B3%9B%E5%9E%8B/</url>
       <content type="html"><![CDATA[<hr>
