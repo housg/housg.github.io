@@ -3,6 +3,14 @@
   
     
     <entry>
+      <title><![CDATA[Test图片]]></title>
+      <url>/Test%E5%9B%BE%E7%89%87/</url>
+      <content type="html"></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[JSP技术]]></title>
       <url>/JSP%E6%8A%80%E6%9C%AF/</url>
       <content type="html"><![CDATA[<hr>
