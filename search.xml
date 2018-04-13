@@ -1301,22 +1301,6 @@ transient表示瞬态、临时的，其不能序列化到文件中。
     </entry>
     
     <entry>
-      <title><![CDATA[Test图片]]></title>
-      <url>/Test%E5%9B%BE%E7%89%87/</url>
-      <content type="html"><![CDATA[<p>这是我测试的一个hexo博文添加图片的md</p>
-<p><img src="/Test图片/01.jpg" alt="图片"></p>
-]]></content>
-      
-        
-        <tags>
-            
-            <tag> 图片 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[多线程之传统多线程]]></title>
       <url>/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8B%E4%BC%A0%E7%BB%9F%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
       <content type="html"><![CDATA[<hr>
