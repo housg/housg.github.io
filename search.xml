@@ -3,14 +3,6 @@
   
     
     <entry>
-      <title><![CDATA[Test图片]]></title>
-      <url>/Test%E5%9B%BE%E7%89%87/</url>
-      <content type="html"></content>
-      
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[JSP技术]]></title>
       <url>/JSP%E6%8A%80%E6%9C%AF/</url>
       <content type="html"><![CDATA[<hr>
@@ -1309,6 +1301,22 @@ transient表示瞬态、临时的，其不能序列化到文件中。
     </entry>
     
     <entry>
+      <title><![CDATA[Test图片]]></title>
+      <url>/Test%E5%9B%BE%E7%89%87/</url>
+      <content type="html"><![CDATA[<p>这是我测试的一个hexo博文添加图片的md</p>
+<p><img src="/Test图片/01.jpg" alt="图片"></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 图片 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[多线程之传统多线程]]></title>
       <url>/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8B%E4%BC%A0%E7%BB%9F%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
       <content type="html"><![CDATA[<hr>
@@ -1965,89 +1973,6 @@ private static void updateFormula(Workbook wb,Sheet s,int row){
     </entry>
     
     <entry>
-      <title><![CDATA[类加载器]]></title>
-      <url>/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/</url>
-      <content type="html"><![CDATA[<hr>
-<p><strong>Contents</strong></p>
-<ul>
-<li><a href="#java基础巩固笔记3-类加载器">java基础巩固笔记(3)-类加载器</a><ul>
-<li><a href="#默认类加载器">默认类加载器</a></li>
-<li><a href="#类加载器的委托机制">类加载器的委托机制</a></li>
-<li><a href="#自定义类加载器的编写原理">自定义类加载器的编写原理</a></li>
-<li><a href="#参考资料">参考资料</a></li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>java类加载器就是在运行时在JVM中动态地加载所需的类，java类加载器基于三个机制：委托，可见，单一。</p>
-<p>把 classpath 下的那些 <code>.class</code> 文件加载进内存，处理后形成可以被虚拟机直接使用的 Java 类型，这些工作是类加载器做的。</p>
-<ul>
-<li><strong>委托机制</strong>指的是将加载类的请求传递给父加载器，如果父加载器找不到或者不能加载这个类，那么再加载他。</li>
-<li><strong>可见性机制</strong>指的是父加载器加载的类都能被子加载器看见，但是子加载器加载的类父加载器是看不见的。</li>
-<li><strong>单一性机制</strong>指的是一个类只能被同一种加载器加载一次。</li>
-</ul>
-<h2 id="默认类加载器"><a href="#默认类加载器" class="headerlink" title="默认类加载器"></a>默认类加载器</h2><p>系统默认三个类加载器:</p>
-<ul>
-<li><code>BootStrap</code></li>
-<li><code>ExtClassLoader</code></li>
-<li><code>AppClassLoader</code></li>
-</ul>
-<p><em>类加载器也是java类，而BootStrap不是。</em><br>验证代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLoaderTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(System.class.getClassLoader());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出：<code>null</code></p>
-<p>如果使用<code>System.out.println(System.class.getClassLoader().toString);</code>，则报空指针异常:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.NullPointerException</span><br><span class="line">	at com.iot.classloader.ClassLoaderTest.main(ClassLoaderTest.java:10)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:483)</span><br><span class="line">	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:144)</span><br></pre></td></tr></table></figure>
-<p>可见，System类是由BootStrap类加载器加载。</p>
-<h2 id="类加载器的委托机制"><a href="#类加载器的委托机制" class="headerlink" title="类加载器的委托机制"></a>类加载器的委托机制</h2><p>类加载器的树状图</p>
-<p><img src="http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%93%E6%9E%84%E5%9B%BE.png" alt="类加载器"></p>
-<p>一般加载类的顺序：</p>
-<ul>
-<li>首先当前线程的类加载器去加载线程中的第一个类</li>
-<li>如果类A应用了类B，java虚拟机将使用加载类A的类加载器来加载类B</li>
-<li>还可以直接调用ClassLoader.loadClass()方法来指定某个类加载器去加载某个类</li>
-</ul>
-<hr>
-<h2 id="自定义类加载器的编写原理"><a href="#自定义类加载器的编写原理" class="headerlink" title="自定义类加载器的编写原理"></a>自定义类加载器的编写原理</h2><p>API:</p>
-<blockquote>
-<p><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/ClassLoader.html" target="_blank" rel="external">Class ClassLoader</a></p>
-</blockquote>
-<p>模板方法设计模式</p>
-<p>父类:</p>
-<ul>
-<li><code>loadClass</code>(类加载的流程，模板)</li>
-<li><code>findClass</code>供子类覆盖的、被<code>loadClass</code>方法调用的类加载逻辑</li>
-<li><code>defineClass</code>得到class文件转换成字节码</li>
-</ul>
-<p>子类:覆盖<code>findClass</code>方法</p>
-<p>例子：</p>
-<p><code>loadClass</code>方法的源码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="keyword">boolean</span> resolve)</span><br><span class="line">    <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</span><br><span class="line">        <span class="comment">// First, check if the class has already been loaded</span></span><br><span class="line">        Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">long</span> t0 = System.nanoTime();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (parent != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    c = parent.loadClass(name, <span class="keyword">false</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    c = findBootstrapClassOrNull(name);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                <span class="comment">// ClassNotFoundException thrown if class not found</span></span><br><span class="line">                <span class="comment">// from the non-null parent class loader</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">// If still not found, then invoke findClass in order</span></span><br><span class="line">                <span class="comment">// to find the class.</span></span><br><span class="line">                <span class="keyword">long</span> t1 = System.nanoTime();</span><br><span class="line">                c = findClass(name);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// this is the defining class loader; record the stats</span></span><br><span class="line">                sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (resolve) &#123;</span><br><span class="line">            resolveClass(c);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>API文档中的例子:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NetworkClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span> </span>&#123;</span><br><span class="line">     String host;</span><br><span class="line">     <span class="keyword">int</span> port;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> Class <span class="title">findClass</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">byte</span>[] b = loadClassData(name);</span><br><span class="line">         <span class="keyword">return</span> defineClass(name, b, <span class="number">0</span>, b.length);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">byte</span>[] loadClassData(String name) &#123;</span><br><span class="line">         <span class="comment">// load the class data from the connection</span></span><br><span class="line">          . . .</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
-<ul>
-<li><a href="http://ju.outofmemory.cn/entry/142486" target="_blank" rel="external">java类加载机制工作原理</a></li>
-<li><a href="http://blog.csdn.net/gjanyanlig/article/details/6818655" target="_blank" rel="external">Java类加载器总结 - 寂静大海 - 博客频道 - CSDN.NET</a></li>
-</ul>
-</blockquote>
-<hr>
-<blockquote>
-<p>作者<a href="http://brianway.github.io/" target="_blank" rel="external">@brianway</a>更多文章：<a href="http://brianway.github.io/" target="_blank" rel="external">个人网站</a> | <a href="http://blog.csdn.net/h3243212/" target="_blank" rel="external">CSDN</a> | <a href="http://my.oschina.net/brianway" target="_blank" rel="external">oschina</a></p>
-</blockquote>
-]]></content>
-      
-        
-        <tags>
-            
-            <tag> java </tag>
-            
-            <tag> 基础 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[泛型]]></title>
       <url>/%E6%B3%9B%E5%9E%8B/</url>
       <content type="html"><![CDATA[<hr>
@@ -2166,6 +2091,89 @@ private static void updateFormula(Workbook wb,Sheet s,int row){
 <p>输出结果：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java.util.Map&lt;java.lang.Integer, java.lang.String&gt;</span><br><span class="line">interface java.util.Map</span><br><span class="line">class java.lang.Integer</span><br><span class="line">class java.lang.String</span><br></pre></td></tr></table></figure>
 <p>作者<a href="http://brianway.github.io/" target="_blank" rel="external">@brianway</a>更多文章：<a href="http://brianway.github.io/" target="_blank" rel="external">个人网站</a> | <a href="http://blog.csdn.net/h3243212/" target="_blank" rel="external">CSDN</a> | <a href="http://my.oschina.net/brianway" target="_blank" rel="external">oschina</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> 基础 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[类加载器]]></title>
+      <url>/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/</url>
+      <content type="html"><![CDATA[<hr>
+<p><strong>Contents</strong></p>
+<ul>
+<li><a href="#java基础巩固笔记3-类加载器">java基础巩固笔记(3)-类加载器</a><ul>
+<li><a href="#默认类加载器">默认类加载器</a></li>
+<li><a href="#类加载器的委托机制">类加载器的委托机制</a></li>
+<li><a href="#自定义类加载器的编写原理">自定义类加载器的编写原理</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>java类加载器就是在运行时在JVM中动态地加载所需的类，java类加载器基于三个机制：委托，可见，单一。</p>
+<p>把 classpath 下的那些 <code>.class</code> 文件加载进内存，处理后形成可以被虚拟机直接使用的 Java 类型，这些工作是类加载器做的。</p>
+<ul>
+<li><strong>委托机制</strong>指的是将加载类的请求传递给父加载器，如果父加载器找不到或者不能加载这个类，那么再加载他。</li>
+<li><strong>可见性机制</strong>指的是父加载器加载的类都能被子加载器看见，但是子加载器加载的类父加载器是看不见的。</li>
+<li><strong>单一性机制</strong>指的是一个类只能被同一种加载器加载一次。</li>
+</ul>
+<h2 id="默认类加载器"><a href="#默认类加载器" class="headerlink" title="默认类加载器"></a>默认类加载器</h2><p>系统默认三个类加载器:</p>
+<ul>
+<li><code>BootStrap</code></li>
+<li><code>ExtClassLoader</code></li>
+<li><code>AppClassLoader</code></li>
+</ul>
+<p><em>类加载器也是java类，而BootStrap不是。</em><br>验证代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLoaderTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(System.class.getClassLoader());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：<code>null</code></p>
+<p>如果使用<code>System.out.println(System.class.getClassLoader().toString);</code>，则报空指针异常:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.NullPointerException</span><br><span class="line">	at com.iot.classloader.ClassLoaderTest.main(ClassLoaderTest.java:10)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:483)</span><br><span class="line">	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:144)</span><br></pre></td></tr></table></figure>
+<p>可见，System类是由BootStrap类加载器加载。</p>
+<h2 id="类加载器的委托机制"><a href="#类加载器的委托机制" class="headerlink" title="类加载器的委托机制"></a>类加载器的委托机制</h2><p>类加载器的树状图</p>
+<p><img src="http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%93%E6%9E%84%E5%9B%BE.png" alt="类加载器"></p>
+<p>一般加载类的顺序：</p>
+<ul>
+<li>首先当前线程的类加载器去加载线程中的第一个类</li>
+<li>如果类A应用了类B，java虚拟机将使用加载类A的类加载器来加载类B</li>
+<li>还可以直接调用ClassLoader.loadClass()方法来指定某个类加载器去加载某个类</li>
+</ul>
+<hr>
+<h2 id="自定义类加载器的编写原理"><a href="#自定义类加载器的编写原理" class="headerlink" title="自定义类加载器的编写原理"></a>自定义类加载器的编写原理</h2><p>API:</p>
+<blockquote>
+<p><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/ClassLoader.html" target="_blank" rel="external">Class ClassLoader</a></p>
+</blockquote>
+<p>模板方法设计模式</p>
+<p>父类:</p>
+<ul>
+<li><code>loadClass</code>(类加载的流程，模板)</li>
+<li><code>findClass</code>供子类覆盖的、被<code>loadClass</code>方法调用的类加载逻辑</li>
+<li><code>defineClass</code>得到class文件转换成字节码</li>
+</ul>
+<p>子类:覆盖<code>findClass</code>方法</p>
+<p>例子：</p>
+<p><code>loadClass</code>方法的源码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="keyword">boolean</span> resolve)</span><br><span class="line">    <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</span><br><span class="line">        <span class="comment">// First, check if the class has already been loaded</span></span><br><span class="line">        Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">long</span> t0 = System.nanoTime();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (parent != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    c = parent.loadClass(name, <span class="keyword">false</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    c = findBootstrapClassOrNull(name);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                <span class="comment">// ClassNotFoundException thrown if class not found</span></span><br><span class="line">                <span class="comment">// from the non-null parent class loader</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">// If still not found, then invoke findClass in order</span></span><br><span class="line">                <span class="comment">// to find the class.</span></span><br><span class="line">                <span class="keyword">long</span> t1 = System.nanoTime();</span><br><span class="line">                c = findClass(name);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// this is the defining class loader; record the stats</span></span><br><span class="line">                sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (resolve) &#123;</span><br><span class="line">            resolveClass(c);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>API文档中的例子:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NetworkClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span> </span>&#123;</span><br><span class="line">     String host;</span><br><span class="line">     <span class="keyword">int</span> port;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> Class <span class="title">findClass</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">byte</span>[] b = loadClassData(name);</span><br><span class="line">         <span class="keyword">return</span> defineClass(name, b, <span class="number">0</span>, b.length);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">byte</span>[] loadClassData(String name) &#123;</span><br><span class="line">         <span class="comment">// load the class data from the connection</span></span><br><span class="line">          . . .</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li><a href="http://ju.outofmemory.cn/entry/142486" target="_blank" rel="external">java类加载机制工作原理</a></li>
+<li><a href="http://blog.csdn.net/gjanyanlig/article/details/6818655" target="_blank" rel="external">Java类加载器总结 - 寂静大海 - 博客频道 - CSDN.NET</a></li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p>作者<a href="http://brianway.github.io/" target="_blank" rel="external">@brianway</a>更多文章：<a href="http://brianway.github.io/" target="_blank" rel="external">个人网站</a> | <a href="http://blog.csdn.net/h3243212/" target="_blank" rel="external">CSDN</a> | <a href="http://my.oschina.net/brianway" target="_blank" rel="external">oschina</a></p>
+</blockquote>
 ]]></content>
       
         
