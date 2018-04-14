@@ -685,6 +685,46 @@
     </entry>
     
     <entry>
+      <title><![CDATA[Quartz入门详解]]></title>
+      <url>/Quartz%E5%85%A5%E9%97%A8%E8%AF%A6%E8%A7%A3/</url>
+      <content type="html"><![CDATA[<p>##入门简介：</p>
+<p>基本上任何公司都会用到调度这个功能， 比如我们公司需要<code>定期执行调度生成报表</code>， 或者比如博客什么的<code>定时更新</code>之类的，都可以靠Quartz来完成。正如官网所说，小到独立应用大到大型电子商务网站， Quartz都能胜任。</p>
+<h2 id="Quartz体系结构："><a href="#Quartz体系结构：" class="headerlink" title="Quartz体系结构："></a>Quartz体系结构：</h2><p>明白Quartz怎么用，首先要了解<code>Scheduler</code>(调度器)、<code>Job</code>(任务)和<code>Trigger</code>(触发器)这3个核心的概念。</p>
+<h3 id="Job"><a href="#Job" class="headerlink" title="Job"></a>Job</h3><p>是<code>一个接口</code>，只定义一个方法<code>execute(JobExecutionContext context)</code>，在实现接口的execute方法中编写所需要定时执行的<code>Job(任务)</code>， JobExecutionContext类提供了调度应用的一些信息。Job运行时的信息保存在<code>JobDataMap</code>实例中；</p>
+<h3 id="JobDetail"><a href="#JobDetail" class="headerlink" title="JobDetail"></a>JobDetail</h3><p>Quartz每次调度Job时， 都重新创建一个Job实例， 所以它不直接接受一个Job的实例，相反它接收一个Job实现类(<code>JobDetail</code>:描述Job的实现类及其它相关的静态信息，如Job名字、描述、关联监听器等信息)，以便运行时通过newInstance()的反射机制实例化Job。</p>
+<h3 id="Trigger"><a href="#Trigger" class="headerlink" title="Trigger"></a>Trigger</h3><p>是<code>一个类</code>，描述触发Job执行的时间触发规则。主要有<code>SimpleTrigger</code>和<code>CronTrigger</code>这两个子类。当且仅当需调度一次或者以固定时间间隔周期执行调度，SimpleTrigger是最适合的选择；而CronTrigger则可以通过<code>Cron表达式</code>定义出各种复杂时间规则的调度方案：如工作日周一到周五的15：00~16：00执行调度等；</p>
+<p><strong>Cron表达式的格式</strong>：秒 分 时 日 月 周 年(可选)。<br>字段名                 允许的值                        允许的特殊字符<br>秒                         0-59                               ,  <code>– * /</code><br>分                         0-59                               , <code>– * /</code><br>小时                   0-23                                 , <code>– * /</code><br>日                         1-31                               ,<code>– * ? / L W C</code><br>月                         1-12 or JAN-DEC           , <code>– * /</code><br>周几                     1-7 or SUN-SAT             , <code>– * ? / L C #      MON  FRI</code><br>年 (可选字段)     empty, 1970-2099            ,<code>– * /</code></p>
+<p>“?”字符：表示不确定的值<br>“,”字符：指定数个值<br>“-”字符：指定一个值的范围<br>“/”字符：指定一个值的增加幅度。n/m表示从n开始，每次增加m<br>“L”字符：用在日表示一个月中的最后一天，用在周表示该月最后一个星期X<br>“W”字符：指定离给定日期最近的工作日(周一到周五)<br>“#”字符：表示该月第几个周X。6#3表示该月第3个周五</p>
+<p><strong>Cron表达式范例</strong>：<br>每隔5秒执行一次：<em>/5 </em> <em> </em> <em> ?<br>每隔1分钟执行一次：0 </em>/1 <em> </em> <em> ?<br>每天23点执行一次：0 0 23 </em> <em> ?<br>每天凌晨1点执行一次：0 0 1 </em> <em> ?<br>每月1号凌晨1点执行一次：0 0 1 1 </em> ?<br>每月最后一天23点执行一次：0 0 23 L <em> ?<br>每周星期天凌晨1点实行一次：0 0 1 ? </em> L<br>在26分、29分、33分执行一次：0 26,29,33 <em> </em> <em> ?<br>每天的0点、13点、18点、21点都执行一次：0 0 0,13,18,21 </em> * ?</p>
+<p> <strong>Calendar：org.quartz.Calendar</strong>和java.util.Calendar不同， 它是一些日历特定时间点的集合（可以简单地将org.quartz.Calendar看作java.util.Calendar的集合——java.util.Calendar代表一个日历时间点，无特殊说明后面的Calendar即指org.quartz.Calendar）。 一个Trigger可以和多个Calendar关联， 以便排除或包含某些时间点。</p>
+<p>假设，我们安排每周星期一早上10:00执行任务，但是如果碰到法定的节日，任务则不执行，这时就需要在Trigger触发机制的基础上使用Calendar进行定点排除。针对不同时间段类型，Quartz在org.quartz.impl.calendar包下提供了若干个Calendar的实现类，如AnnualCalendar、MonthlyCalendar、WeeklyCalendar分别针对每年、每月和每周进行定义；</p>
+<p><strong>Scheduler：</strong> 代表一个Quartz的独立运行容器， Trigger和JobDetail可以注册到Scheduler中， 两者在Scheduler中拥有各自的组及名称， 组及名称是Scheduler查找定位容器中某一对象的依据， Trigger的组及名称必须唯一， JobDetail的组和名称也必须唯一（但可以和Trigger的组和名称相同，因为它们是不同类型的）。Scheduler定义了多个接口方法， 允许外部通过组及名称访问和控制容器中Trigger和JobDetail。</p>
+<p>Scheduler可以将Trigger绑定到某一JobDetail中， 这样当Trigger触发时， 对应的Job就被执行。一个Job可以对应多个Trigger， 但一个Trigger只能对应一个Job。可以通过SchedulerFactory创建一个Scheduler实例。Scheduler拥有一个SchedulerContext，它类似于ServletContext，保存着Scheduler上下文信息，Job和Trigger都可以访问SchedulerContext内的信息。SchedulerContext内部通过一个Map，以键值对的方式维护这些上下文数据，SchedulerContext为保存和获取数据提供了多个put()和getXxx()的方法。可以通过Scheduler# getContext()获取对应的SchedulerContext实例；</p>
+<p><strong>ThreadPool：</strong> Scheduler使用一个线程池作为任务运行的基础设施，任务通过共享线程池中的线程提高运行效率。<br>Job有一个StatefulJob子接口，代表有状态的任务，该接口是一个没有方法的标签接口，其目的是让Quartz知道任务的类型，以便采用不同的执行方案。无状态任务在执行时拥有自己的JobDataMap拷贝，对JobDataMap的更改不会影响下次的执行。而有状态任务共享共享同一个JobDataMap实例，每次任务执行对JobDataMap所做的更改会保存下来，后面的执行可以看到这个更改，也即每次执行任务后都会对后面的执行发生影响。<br>正因为这个原因，无状态的Job可以并发执行，而有状态的StatefulJob不能并发执行，这意味着如果前次的StatefulJob还没有执行完毕，下一次的任务将阻塞等待，直到前次任务执行完毕。有状态任务比无状态任务需要考虑更多的因素，程序往往拥有更高的复杂度，因此除非必要，应该尽量使用无状态的Job。<br>如果Quartz使用了数据库持久化任务调度信息，无状态的JobDataMap仅会在Scheduler注册任务时保持一次，而有状态任务对应的JobDataMap在每次执行任务后都会进行保存。<br>Trigger自身也可以拥有一个JobDataMap，其关联的Job可以通过JobExecutionContext#getTrigger().getJobDataMap()获取Trigger中的JobDataMap。不管是有状态还是无状态的任务，在任务执行期间对Trigger的JobDataMap所做的更改都不会进行持久，也即不会对下次的执行产生影响。</p>
+<p>Quartz拥有完善的事件和监听体系，大部分组件都拥有事件，如任务执行前事件、任务执行后事件、触发器触发前事件、触发后事件、调度器开始事件、关闭事件等等，可以注册相应的监听器处理感兴趣的事件。</p>
+<p>下图描述了Scheduler的内部组件结构，SchedulerContext提供Scheduler全局可见的上下文信息，每一个任务都对应一个JobDataMap，虚线表达的JobDataMap表示对应有状态的任务：</p>
+<p>废话不多说， 上代码：</p>
+<ol>
+<li><p>最简单的Job代码(就打印Hello Quartz ！)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">package com.wenniuwuren.quartz;  </span><br><span class="line"> </span><br><span class="line">import org.quartz.Job;  </span><br><span class="line">import org.quartz.JobExecutionContext;  </span><br><span class="line">import org.quartz.JobExecutionException;  </span><br><span class="line"> </span><br><span class="line">public class HelloQuartz  implements Job &#123;  </span><br><span class="line"> </span><br><span class="line">    public void execute(JobExecutionContext arg0) throws JobExecutionException &#123;  </span><br><span class="line">        System.out.println(&quot;Hello Quartz !&quot;);                 </span><br><span class="line">    &#125;         </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置触发器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">package com.wenniuwuren.quartz;  </span><br><span class="line"> </span><br><span class="line">import org.quartz.CronScheduleBuilder;    </span><br><span class="line">import org.quartz.JobBuilder;    </span><br><span class="line">import org.quartz.JobDetail;    </span><br><span class="line">import org.quartz.Scheduler;    </span><br><span class="line">import org.quartz.SchedulerException;  </span><br><span class="line">import org.quartz.SchedulerFactory;    </span><br><span class="line">import org.quartz.SimpleScheduleBuilder;  </span><br><span class="line">import org.quartz.Trigger;    </span><br><span class="line">import org.quartz.TriggerBuilder;    </span><br><span class="line">import org.quartz.impl.StdSchedulerFactory;    </span><br><span class="line"> </span><br><span class="line">public class SchedulerTest &#123;    </span><br><span class="line">   public static void main(String[] args) throws InterruptedException &#123;    </span><br><span class="line"> </span><br><span class="line">       //通过schedulerFactory获取一个调度器    </span><br><span class="line">       SchedulerFactory schedulerfactory = new StdSchedulerFactory();    </span><br><span class="line">       Scheduler scheduler=null;    </span><br><span class="line">       try&#123;    </span><br><span class="line">           // 通过schedulerFactory获取一个调度器    </span><br><span class="line">           scheduler = schedulerfactory.getScheduler();    </span><br><span class="line"> </span><br><span class="line">            // 创建jobDetail实例，绑定Job实现类    </span><br><span class="line">            // 指明job的名称，所在组的名称，以及绑定job类    </span><br><span class="line">           JobDetail job = JobBuilder.newJob(HelloQuartz.class).withIdentity(&quot;JobName&quot;, &quot;JobGroupName&quot;).build();    </span><br><span class="line"> </span><br><span class="line">            // 定义调度触发规则    </span><br><span class="line"> </span><br><span class="line">            // SimpleTrigger   </span><br><span class="line">//      Trigger trigger=TriggerBuilder.newTrigger().withIdentity(&quot;SimpleTrigger&quot;, &quot;SimpleTriggerGroup&quot;)    </span><br><span class="line">//                    .withSchedule(SimpleScheduleBuilder.repeatSecondlyForever(3).withRepeatCount(6))    </span><br><span class="line">//                    .startNow().build();    </span><br><span class="line"> </span><br><span class="line">            //  corn表达式  每五秒执行一次  </span><br><span class="line">              Trigger trigger=TriggerBuilder.newTrigger().withIdentity(&quot;CronTrigger1&quot;, &quot;CronTriggerGroup&quot;)    </span><br><span class="line">              .withSchedule(CronScheduleBuilder.cronSchedule(&quot;*/5 * * * * ?&quot;))    </span><br><span class="line">              .startNow().build();     </span><br><span class="line"> </span><br><span class="line">            // 把作业和触发器注册到任务调度中    </span><br><span class="line">           scheduler.scheduleJob(job, trigger);    </span><br><span class="line"> </span><br><span class="line">           // 启动调度    </span><br><span class="line">           scheduler.start();    </span><br><span class="line"> </span><br><span class="line">           Thread.sleep(10000);  </span><br><span class="line"> </span><br><span class="line">           // 停止调度  </span><br><span class="line">           scheduler.shutdown();  </span><br><span class="line"> </span><br><span class="line">       &#125;catch(SchedulerException e)&#123;    </span><br><span class="line">           e.printStackTrace();    </span><br><span class="line">       &#125;    </span><br><span class="line"> </span><br><span class="line">   &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>输出(设置了sleep10秒， 故在0秒调度一次， 5秒一次， 10秒最后一次)：</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> Quartz </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[shiro授权]]></title>
       <url>/shiro%E6%8E%88%E6%9D%83/</url>
       <content type="html"><![CDATA[<p>授权，也叫访问控制，即在应用中控制谁能访问哪些资源（如访问页面/编辑数据/页面操作等）。在授权中需了解的几个关键对象：主体（Subject）、资源（Resource）、权限（Permission）、角色（Role）。</p>
@@ -2182,6 +2222,89 @@ private static void updateFormula(Workbook wb,Sheet s,int row){
     </entry>
     
     <entry>
+      <title><![CDATA[类加载器]]></title>
+      <url>/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/</url>
+      <content type="html"><![CDATA[<hr>
+<p><strong>Contents</strong></p>
+<ul>
+<li><a href="#java基础巩固笔记3-类加载器">java基础巩固笔记(3)-类加载器</a><ul>
+<li><a href="#默认类加载器">默认类加载器</a></li>
+<li><a href="#类加载器的委托机制">类加载器的委托机制</a></li>
+<li><a href="#自定义类加载器的编写原理">自定义类加载器的编写原理</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>java类加载器就是在运行时在JVM中动态地加载所需的类，java类加载器基于三个机制：委托，可见，单一。</p>
+<p>把 classpath 下的那些 <code>.class</code> 文件加载进内存，处理后形成可以被虚拟机直接使用的 Java 类型，这些工作是类加载器做的。</p>
+<ul>
+<li><strong>委托机制</strong>指的是将加载类的请求传递给父加载器，如果父加载器找不到或者不能加载这个类，那么再加载他。</li>
+<li><strong>可见性机制</strong>指的是父加载器加载的类都能被子加载器看见，但是子加载器加载的类父加载器是看不见的。</li>
+<li><strong>单一性机制</strong>指的是一个类只能被同一种加载器加载一次。</li>
+</ul>
+<h2 id="默认类加载器"><a href="#默认类加载器" class="headerlink" title="默认类加载器"></a>默认类加载器</h2><p>系统默认三个类加载器:</p>
+<ul>
+<li><code>BootStrap</code></li>
+<li><code>ExtClassLoader</code></li>
+<li><code>AppClassLoader</code></li>
+</ul>
+<p><em>类加载器也是java类，而BootStrap不是。</em><br>验证代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLoaderTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(System.class.getClassLoader());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：<code>null</code></p>
+<p>如果使用<code>System.out.println(System.class.getClassLoader().toString);</code>，则报空指针异常:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.NullPointerException</span><br><span class="line">	at com.iot.classloader.ClassLoaderTest.main(ClassLoaderTest.java:10)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:483)</span><br><span class="line">	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:144)</span><br></pre></td></tr></table></figure>
+<p>可见，System类是由BootStrap类加载器加载。</p>
+<h2 id="类加载器的委托机制"><a href="#类加载器的委托机制" class="headerlink" title="类加载器的委托机制"></a>类加载器的委托机制</h2><p>类加载器的树状图</p>
+<p><img src="http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%93%E6%9E%84%E5%9B%BE.png" alt="类加载器"></p>
+<p>一般加载类的顺序：</p>
+<ul>
+<li>首先当前线程的类加载器去加载线程中的第一个类</li>
+<li>如果类A应用了类B，java虚拟机将使用加载类A的类加载器来加载类B</li>
+<li>还可以直接调用ClassLoader.loadClass()方法来指定某个类加载器去加载某个类</li>
+</ul>
+<hr>
+<h2 id="自定义类加载器的编写原理"><a href="#自定义类加载器的编写原理" class="headerlink" title="自定义类加载器的编写原理"></a>自定义类加载器的编写原理</h2><p>API:</p>
+<blockquote>
+<p><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/ClassLoader.html" target="_blank" rel="external">Class ClassLoader</a></p>
+</blockquote>
+<p>模板方法设计模式</p>
+<p>父类:</p>
+<ul>
+<li><code>loadClass</code>(类加载的流程，模板)</li>
+<li><code>findClass</code>供子类覆盖的、被<code>loadClass</code>方法调用的类加载逻辑</li>
+<li><code>defineClass</code>得到class文件转换成字节码</li>
+</ul>
+<p>子类:覆盖<code>findClass</code>方法</p>
+<p>例子：</p>
+<p><code>loadClass</code>方法的源码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="keyword">boolean</span> resolve)</span><br><span class="line">    <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</span><br><span class="line">        <span class="comment">// First, check if the class has already been loaded</span></span><br><span class="line">        Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">long</span> t0 = System.nanoTime();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (parent != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    c = parent.loadClass(name, <span class="keyword">false</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    c = findBootstrapClassOrNull(name);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                <span class="comment">// ClassNotFoundException thrown if class not found</span></span><br><span class="line">                <span class="comment">// from the non-null parent class loader</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">// If still not found, then invoke findClass in order</span></span><br><span class="line">                <span class="comment">// to find the class.</span></span><br><span class="line">                <span class="keyword">long</span> t1 = System.nanoTime();</span><br><span class="line">                c = findClass(name);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// this is the defining class loader; record the stats</span></span><br><span class="line">                sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (resolve) &#123;</span><br><span class="line">            resolveClass(c);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>API文档中的例子:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NetworkClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span> </span>&#123;</span><br><span class="line">     String host;</span><br><span class="line">     <span class="keyword">int</span> port;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> Class <span class="title">findClass</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">byte</span>[] b = loadClassData(name);</span><br><span class="line">         <span class="keyword">return</span> defineClass(name, b, <span class="number">0</span>, b.length);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">byte</span>[] loadClassData(String name) &#123;</span><br><span class="line">         <span class="comment">// load the class data from the connection</span></span><br><span class="line">          . . .</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li><a href="http://ju.outofmemory.cn/entry/142486" target="_blank" rel="external">java类加载机制工作原理</a></li>
+<li><a href="http://blog.csdn.net/gjanyanlig/article/details/6818655" target="_blank" rel="external">Java类加载器总结 - 寂静大海 - 博客频道 - CSDN.NET</a></li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p>作者<a href="http://brianway.github.io/" target="_blank" rel="external">@brianway</a>更多文章：<a href="http://brianway.github.io/" target="_blank" rel="external">个人网站</a> | <a href="http://blog.csdn.net/h3243212/" target="_blank" rel="external">CSDN</a> | <a href="http://my.oschina.net/brianway" target="_blank" rel="external">oschina</a></p>
+</blockquote>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> 基础 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[泛型]]></title>
       <url>/%E6%B3%9B%E5%9E%8B/</url>
       <content type="html"><![CDATA[<hr>
@@ -2300,89 +2423,6 @@ private static void updateFormula(Workbook wb,Sheet s,int row){
 <p>输出结果：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java.util.Map&lt;java.lang.Integer, java.lang.String&gt;</span><br><span class="line">interface java.util.Map</span><br><span class="line">class java.lang.Integer</span><br><span class="line">class java.lang.String</span><br></pre></td></tr></table></figure>
 <p>作者<a href="http://brianway.github.io/" target="_blank" rel="external">@brianway</a>更多文章：<a href="http://brianway.github.io/" target="_blank" rel="external">个人网站</a> | <a href="http://blog.csdn.net/h3243212/" target="_blank" rel="external">CSDN</a> | <a href="http://my.oschina.net/brianway" target="_blank" rel="external">oschina</a></p>
-]]></content>
-      
-        
-        <tags>
-            
-            <tag> java </tag>
-            
-            <tag> 基础 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[类加载器]]></title>
-      <url>/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/</url>
-      <content type="html"><![CDATA[<hr>
-<p><strong>Contents</strong></p>
-<ul>
-<li><a href="#java基础巩固笔记3-类加载器">java基础巩固笔记(3)-类加载器</a><ul>
-<li><a href="#默认类加载器">默认类加载器</a></li>
-<li><a href="#类加载器的委托机制">类加载器的委托机制</a></li>
-<li><a href="#自定义类加载器的编写原理">自定义类加载器的编写原理</a></li>
-<li><a href="#参考资料">参考资料</a></li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>java类加载器就是在运行时在JVM中动态地加载所需的类，java类加载器基于三个机制：委托，可见，单一。</p>
-<p>把 classpath 下的那些 <code>.class</code> 文件加载进内存，处理后形成可以被虚拟机直接使用的 Java 类型，这些工作是类加载器做的。</p>
-<ul>
-<li><strong>委托机制</strong>指的是将加载类的请求传递给父加载器，如果父加载器找不到或者不能加载这个类，那么再加载他。</li>
-<li><strong>可见性机制</strong>指的是父加载器加载的类都能被子加载器看见，但是子加载器加载的类父加载器是看不见的。</li>
-<li><strong>单一性机制</strong>指的是一个类只能被同一种加载器加载一次。</li>
-</ul>
-<h2 id="默认类加载器"><a href="#默认类加载器" class="headerlink" title="默认类加载器"></a>默认类加载器</h2><p>系统默认三个类加载器:</p>
-<ul>
-<li><code>BootStrap</code></li>
-<li><code>ExtClassLoader</code></li>
-<li><code>AppClassLoader</code></li>
-</ul>
-<p><em>类加载器也是java类，而BootStrap不是。</em><br>验证代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLoaderTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(System.class.getClassLoader());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出：<code>null</code></p>
-<p>如果使用<code>System.out.println(System.class.getClassLoader().toString);</code>，则报空指针异常:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.NullPointerException</span><br><span class="line">	at com.iot.classloader.ClassLoaderTest.main(ClassLoaderTest.java:10)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:483)</span><br><span class="line">	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:144)</span><br></pre></td></tr></table></figure>
-<p>可见，System类是由BootStrap类加载器加载。</p>
-<h2 id="类加载器的委托机制"><a href="#类加载器的委托机制" class="headerlink" title="类加载器的委托机制"></a>类加载器的委托机制</h2><p>类加载器的树状图</p>
-<p><img src="http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%93%E6%9E%84%E5%9B%BE.png" alt="类加载器"></p>
-<p>一般加载类的顺序：</p>
-<ul>
-<li>首先当前线程的类加载器去加载线程中的第一个类</li>
-<li>如果类A应用了类B，java虚拟机将使用加载类A的类加载器来加载类B</li>
-<li>还可以直接调用ClassLoader.loadClass()方法来指定某个类加载器去加载某个类</li>
-</ul>
-<hr>
-<h2 id="自定义类加载器的编写原理"><a href="#自定义类加载器的编写原理" class="headerlink" title="自定义类加载器的编写原理"></a>自定义类加载器的编写原理</h2><p>API:</p>
-<blockquote>
-<p><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/ClassLoader.html" target="_blank" rel="external">Class ClassLoader</a></p>
-</blockquote>
-<p>模板方法设计模式</p>
-<p>父类:</p>
-<ul>
-<li><code>loadClass</code>(类加载的流程，模板)</li>
-<li><code>findClass</code>供子类覆盖的、被<code>loadClass</code>方法调用的类加载逻辑</li>
-<li><code>defineClass</code>得到class文件转换成字节码</li>
-</ul>
-<p>子类:覆盖<code>findClass</code>方法</p>
-<p>例子：</p>
-<p><code>loadClass</code>方法的源码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="keyword">boolean</span> resolve)</span><br><span class="line">    <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</span><br><span class="line">        <span class="comment">// First, check if the class has already been loaded</span></span><br><span class="line">        Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">long</span> t0 = System.nanoTime();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (parent != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    c = parent.loadClass(name, <span class="keyword">false</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    c = findBootstrapClassOrNull(name);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                <span class="comment">// ClassNotFoundException thrown if class not found</span></span><br><span class="line">                <span class="comment">// from the non-null parent class loader</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">// If still not found, then invoke findClass in order</span></span><br><span class="line">                <span class="comment">// to find the class.</span></span><br><span class="line">                <span class="keyword">long</span> t1 = System.nanoTime();</span><br><span class="line">                c = findClass(name);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// this is the defining class loader; record the stats</span></span><br><span class="line">                sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (resolve) &#123;</span><br><span class="line">            resolveClass(c);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>API文档中的例子:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NetworkClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span> </span>&#123;</span><br><span class="line">     String host;</span><br><span class="line">     <span class="keyword">int</span> port;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> Class <span class="title">findClass</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">byte</span>[] b = loadClassData(name);</span><br><span class="line">         <span class="keyword">return</span> defineClass(name, b, <span class="number">0</span>, b.length);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">byte</span>[] loadClassData(String name) &#123;</span><br><span class="line">         <span class="comment">// load the class data from the connection</span></span><br><span class="line">          . . .</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
-<ul>
-<li><a href="http://ju.outofmemory.cn/entry/142486" target="_blank" rel="external">java类加载机制工作原理</a></li>
-<li><a href="http://blog.csdn.net/gjanyanlig/article/details/6818655" target="_blank" rel="external">Java类加载器总结 - 寂静大海 - 博客频道 - CSDN.NET</a></li>
-</ul>
-</blockquote>
-<hr>
-<blockquote>
-<p>作者<a href="http://brianway.github.io/" target="_blank" rel="external">@brianway</a>更多文章：<a href="http://brianway.github.io/" target="_blank" rel="external">个人网站</a> | <a href="http://blog.csdn.net/h3243212/" target="_blank" rel="external">CSDN</a> | <a href="http://my.oschina.net/brianway" target="_blank" rel="external">oschina</a></p>
-</blockquote>
 ]]></content>
       
         
