@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Quartz," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="Quartz与spring整合实现方式 title: Quartz与spring整合实现方式date: 2016-09-01 11:23:55 tags: [Quartz]Maven的pom.xml的配置：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253">
+<meta name="description" content="Quartz与spring整合实现方式Maven的pom.xml的配置：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot">
+<meta name="keywords" content="Quartz">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hou-Blog">
+<meta property="og:title" content="Quartz与spring整合实现方式">
 <meta property="og:url" content="http://yoursite.com/Quartz与spring整合实现方式/index.html">
 <meta property="og:site_name" content="Hou-Blog">
-<meta property="og:description" content="Quartz与spring整合实现方式 title: Quartz与spring整合实现方式date: 2016-09-01 11:23:55 tags: [Quartz]Maven的pom.xml的配置：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253">
+<meta property="og:description" content="Quartz与spring整合实现方式Maven的pom.xml的配置：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-17T03:14:10.782Z">
+<meta property="og:updated_time" content="2018-04-17T03:16:50.684Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hou-Blog">
-<meta name="twitter:description" content="Quartz与spring整合实现方式 title: Quartz与spring整合实现方式date: 2016-09-01 11:23:55 tags: [Quartz]Maven的pom.xml的配置：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253">
+<meta name="twitter:title" content="Quartz与spring整合实现方式">
+<meta name="twitter:description" content="Quartz与spring整合实现方式Maven的pom.xml的配置：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot">
 
 
 
@@ -125,7 +126,7 @@
 
 
 
-  <title> | Hou-Blog</title>
+  <title>Quartz与spring整合实现方式 | Hou-Blog</title>
   
 
 
@@ -313,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">Quartz与spring整合实现方式</h1>
         
 
         <div class="post-meta">
@@ -325,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-17T11:14:06+08:00">
-                2018-04-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-01T11:23:55+08:00">
+                2016-09-01
               </time>
             
 
@@ -354,7 +355,7 @@
 
           
           
-             <span id="/Quartz与spring整合实现方式/" class="leancloud_visitors" data-flag-title="">
+             <span id="/Quartz与spring整合实现方式/" class="leancloud_visitors" data-flag-title="Quartz与spring整合实现方式">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -388,9 +389,7 @@
       
 
       
-        <h1 id="Quartz与spring整合实现方式"><a href="#Quartz与spring整合实现方式" class="headerlink" title="Quartz与spring整合实现方式"></a>Quartz与spring整合实现方式</h1><hr>
-<p>title: Quartz与spring整合实现方式<br>date: 2016-09-01 11:23:55</p>
-<h2 id="tags-Quartz"><a href="#tags-Quartz" class="headerlink" title="tags: [Quartz]"></a>tags: [Quartz]</h2><h2 id="Maven的pom-xml的配置："><a href="#Maven的pom-xml的配置：" class="headerlink" title="Maven的pom.xml的配置："></a>Maven的pom.xml的配置：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;  </span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;  </span><br><span class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;  </span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;  </span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;  </span><br><span class="line">  </span><br><span class="line">    &lt;groupId&gt;QtzTest&lt;/groupId&gt;  </span><br><span class="line">    &lt;artifactId&gt;QtzTest&lt;/artifactId&gt;  </span><br><span class="line">    &lt;version&gt;1.0&lt;/version&gt;  </span><br><span class="line">  </span><br><span class="line">    &lt;properties&gt;  </span><br><span class="line">        &lt;springframework.version&gt;3.0.5.RELEASE&lt;/springframework.version&gt;  </span><br><span class="line">    &lt;/properties&gt;  </span><br><span class="line">  </span><br><span class="line">    &lt;dependencies&gt;  </span><br><span class="line">        &lt;dependency&gt;  </span><br><span class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;  </span><br><span class="line">            &lt;artifactId&gt;spring-context&lt;/artifactId&gt;  </span><br><span class="line">            &lt;version&gt;$&#123;springframework.version&#125;&lt;/version&gt;  </span><br><span class="line">        &lt;/dependency&gt;  </span><br><span class="line">  </span><br><span class="line">        &lt;dependency&gt;  </span><br><span class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;  </span><br><span class="line">            &lt;artifactId&gt;spring-context-support&lt;/artifactId&gt;  </span><br><span class="line">            &lt;version&gt;$&#123;springframework.version&#125;&lt;/version&gt;  </span><br><span class="line">        &lt;/dependency&gt;  </span><br><span class="line">  </span><br><span class="line">        &lt;dependency&gt;  </span><br><span class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;  </span><br><span class="line">            &lt;artifactId&gt;spring-tx&lt;/artifactId&gt;  </span><br><span class="line">            &lt;version&gt;$&#123;springframework.version&#125;&lt;/version&gt;  </span><br><span class="line">        &lt;/dependency&gt;  </span><br><span class="line">  </span><br><span class="line">        &lt;dependency&gt;  </span><br><span class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;  </span><br><span class="line">            &lt;artifactId&gt;spring-web&lt;/artifactId&gt;  </span><br><span class="line">            &lt;version&gt;$&#123;springframework.version&#125;&lt;/version&gt;  </span><br><span class="line">        &lt;/dependency&gt;  </span><br><span class="line">  </span><br><span class="line">        &lt;dependency&gt;  </span><br><span class="line">            &lt;groupId&gt;org.quartz-scheduler&lt;/groupId&gt;  </span><br><span class="line">            &lt;artifactId&gt;quartz&lt;/artifactId&gt;  </span><br><span class="line">            &lt;version&gt;1.8.5&lt;/version&gt;  </span><br><span class="line">        &lt;/dependency&gt;  </span><br><span class="line">    &lt;/dependencies&gt;  </span><br><span class="line">  </span><br><span class="line">    &lt;build&gt;  </span><br><span class="line">        &lt;finalName&gt;$&#123;project.artifactId&#125;&lt;/finalName&gt;  </span><br><span class="line">        &lt;plugins&gt;  </span><br><span class="line">            &lt;plugin&gt;  </span><br><span class="line">                &lt;groupId&gt;org.mortbay.jetty&lt;/groupId&gt;  </span><br><span class="line">                &lt;artifactId&gt;jetty-maven-plugin&lt;/artifactId&gt;  </span><br><span class="line">                &lt;version&gt;7.5.4.v20111024&lt;/version&gt;  </span><br><span class="line">                &lt;configuration&gt;  </span><br><span class="line">                    &lt;scanIntervalSeconds&gt;10&lt;/scanIntervalSeconds&gt;  </span><br><span class="line">                    &lt;webApp&gt;  </span><br><span class="line">                        &lt;contextPath&gt;/$&#123;project.artifactId&#125;&lt;/contextPath&gt;  </span><br><span class="line">                    &lt;/webApp&gt;  </span><br><span class="line">                &lt;/configuration&gt;  </span><br><span class="line">            &lt;/plugin&gt;  </span><br><span class="line">        &lt;/plugins&gt;  </span><br><span class="line">    &lt;/build&gt;  </span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
+        <h1 id="Quartz与spring整合实现方式"><a href="#Quartz与spring整合实现方式" class="headerlink" title="Quartz与spring整合实现方式"></a>Quartz与spring整合实现方式</h1><h2 id="Maven的pom-xml的配置："><a href="#Maven的pom-xml的配置：" class="headerlink" title="Maven的pom.xml的配置："></a>Maven的pom.xml的配置：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;  </span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;  </span><br><span class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;  </span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;  </span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;  </span><br><span class="line">  </span><br><span class="line">    &lt;groupId&gt;QtzTest&lt;/groupId&gt;  </span><br><span class="line">    &lt;artifactId&gt;QtzTest&lt;/artifactId&gt;  </span><br><span class="line">    &lt;version&gt;1.0&lt;/version&gt;  </span><br><span class="line">  </span><br><span class="line">    &lt;properties&gt;  </span><br><span class="line">        &lt;springframework.version&gt;3.0.5.RELEASE&lt;/springframework.version&gt;  </span><br><span class="line">    &lt;/properties&gt;  </span><br><span class="line">  </span><br><span class="line">    &lt;dependencies&gt;  </span><br><span class="line">        &lt;dependency&gt;  </span><br><span class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;  </span><br><span class="line">            &lt;artifactId&gt;spring-context&lt;/artifactId&gt;  </span><br><span class="line">            &lt;version&gt;$&#123;springframework.version&#125;&lt;/version&gt;  </span><br><span class="line">        &lt;/dependency&gt;  </span><br><span class="line">  </span><br><span class="line">        &lt;dependency&gt;  </span><br><span class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;  </span><br><span class="line">            &lt;artifactId&gt;spring-context-support&lt;/artifactId&gt;  </span><br><span class="line">            &lt;version&gt;$&#123;springframework.version&#125;&lt;/version&gt;  </span><br><span class="line">        &lt;/dependency&gt;  </span><br><span class="line">  </span><br><span class="line">        &lt;dependency&gt;  </span><br><span class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;  </span><br><span class="line">            &lt;artifactId&gt;spring-tx&lt;/artifactId&gt;  </span><br><span class="line">            &lt;version&gt;$&#123;springframework.version&#125;&lt;/version&gt;  </span><br><span class="line">        &lt;/dependency&gt;  </span><br><span class="line">  </span><br><span class="line">        &lt;dependency&gt;  </span><br><span class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;  </span><br><span class="line">            &lt;artifactId&gt;spring-web&lt;/artifactId&gt;  </span><br><span class="line">            &lt;version&gt;$&#123;springframework.version&#125;&lt;/version&gt;  </span><br><span class="line">        &lt;/dependency&gt;  </span><br><span class="line">  </span><br><span class="line">        &lt;dependency&gt;  </span><br><span class="line">            &lt;groupId&gt;org.quartz-scheduler&lt;/groupId&gt;  </span><br><span class="line">            &lt;artifactId&gt;quartz&lt;/artifactId&gt;  </span><br><span class="line">            &lt;version&gt;1.8.5&lt;/version&gt;  </span><br><span class="line">        &lt;/dependency&gt;  </span><br><span class="line">    &lt;/dependencies&gt;  </span><br><span class="line">  </span><br><span class="line">    &lt;build&gt;  </span><br><span class="line">        &lt;finalName&gt;$&#123;project.artifactId&#125;&lt;/finalName&gt;  </span><br><span class="line">        &lt;plugins&gt;  </span><br><span class="line">            &lt;plugin&gt;  </span><br><span class="line">                &lt;groupId&gt;org.mortbay.jetty&lt;/groupId&gt;  </span><br><span class="line">                &lt;artifactId&gt;jetty-maven-plugin&lt;/artifactId&gt;  </span><br><span class="line">                &lt;version&gt;7.5.4.v20111024&lt;/version&gt;  </span><br><span class="line">                &lt;configuration&gt;  </span><br><span class="line">                    &lt;scanIntervalSeconds&gt;10&lt;/scanIntervalSeconds&gt;  </span><br><span class="line">                    &lt;webApp&gt;  </span><br><span class="line">                        &lt;contextPath&gt;/$&#123;project.artifactId&#125;&lt;/contextPath&gt;  </span><br><span class="line">                    &lt;/webApp&gt;  </span><br><span class="line">                &lt;/configuration&gt;  </span><br><span class="line">            &lt;/plugin&gt;  </span><br><span class="line">        &lt;/plugins&gt;  </span><br><span class="line">    &lt;/build&gt;  </span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
 <p><strong>特别注意一点，与Spring3.1以下版本整合必须使用Quartz1，最初我拿2.1.3的，怎么搞都报错：</strong><br>Caused by: org.springframework.beans.factory.CannotLoadBeanClassException: Error loading class [org.springframework.scheduling.quartz.CronTriggerBean] for bean with name ‘mytrigger’ defined in class path resource [applicationContext.xml]: problem with class file or dependent class; nested exception is java.lang.IncompatibleClassChangeError: class org.springframework.scheduling.quartz.CronTriggerBean has interface org.quartz.CronTrigger as super class </p>
 <p>在Spring中使用Quartz有两种方式实现：<strong>第一种是任务类继承QuartzJobBean</strong>，<strong>第二种则是在配置文件里定义任务类和要执行的方法，类和方法仍然是普通类。很显然，第二种方式远比第一种方式来的灵活。</strong> </p>
 <h2 id="第一种方式的JAVA代码-继承QuartzJobBean"><a href="#第一种方式的JAVA代码-继承QuartzJobBean" class="headerlink" title="第一种方式的JAVA代码(继承QuartzJobBean)"></a>第一种方式的JAVA代码(继承QuartzJobBean)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">package com.ncs.hj;  </span><br><span class="line">  </span><br><span class="line">import org.quartz.JobExecutionContext;  </span><br><span class="line">import org.quartz.JobExecutionException;  </span><br><span class="line">import org.springframework.scheduling.quartz.QuartzJobBean;  </span><br><span class="line">  </span><br><span class="line">public class SpringQtz extends QuartzJobBean&#123;  </span><br><span class="line">    private static int counter = 0;  </span><br><span class="line">    protected void executeInternal(JobExecutionContext context) throws JobExecutionException &#123;  </span><br><span class="line">        System.out.println();  </span><br><span class="line">        long ms = System.currentTimeMillis();  </span><br><span class="line">        System.out.println(&quot;\t\t&quot; + new Date(ms));  </span><br><span class="line">        System.out.println(ms);  </span><br><span class="line">        System.out.println(&quot;(&quot; + counter++ + &quot;)&quot;);  </span><br><span class="line">        String s = (String) context.getMergedJobDataMap().get(&quot;service&quot;);  </span><br><span class="line">        System.out.println(s);  </span><br><span class="line">        System.out.println();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -439,6 +438,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Quartz/" rel="tag"># Quartz</a>
+          
+        </div>
+      
 
       
       
@@ -448,8 +453,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/JSP技术/" rel="next" title="JSP技术">
-                <i class="fa fa-chevron-left"></i> JSP技术
+              <a href="/实现AOP功能的封装与配置的小框架/" rel="next" title="实现AOP功能的封装与配置的小框架">
+                <i class="fa fa-chevron-left"></i> 实现AOP功能的封装与配置的小框架
               </a>
             
           </div>
@@ -457,6 +462,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/volatile关键字的底层实现原理/" rel="prev" title="volatile关键字的底层实现原理">
+                volatile关键字的底层实现原理 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -624,7 +633,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Quartz与spring整合实现方式"><span class="nav-number">1.</span> <span class="nav-text">Quartz与spring整合实现方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tags-Quartz"><span class="nav-number">1.1.</span> <span class="nav-text">tags: [Quartz]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven的pom-xml的配置："><span class="nav-number">1.2.</span> <span class="nav-text">Maven的pom.xml的配置：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一种方式的JAVA代码-继承QuartzJobBean"><span class="nav-number">1.3.</span> <span class="nav-text">第一种方式的JAVA代码(继承QuartzJobBean)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二种方式的JAVA代码-普通类更加灵活"><span class="nav-number">1.4.</span> <span class="nav-text">第二种方式的JAVA代码(普通类更加灵活)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring的配置文件："><span class="nav-number">1.5.</span> <span class="nav-text">Spring的配置文件：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Quartz与spring整合实现方式"><span class="nav-number">1.</span> <span class="nav-text">Quartz与spring整合实现方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven的pom-xml的配置："><span class="nav-number">1.1.</span> <span class="nav-text">Maven的pom.xml的配置：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一种方式的JAVA代码-继承QuartzJobBean"><span class="nav-number">1.2.</span> <span class="nav-text">第一种方式的JAVA代码(继承QuartzJobBean)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二种方式的JAVA代码-普通类更加灵活"><span class="nav-number">1.3.</span> <span class="nav-text">第二种方式的JAVA代码(普通类更加灵活)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring的配置文件："><span class="nav-number">1.4.</span> <span class="nav-text">Spring的配置文件：</span></a></li></ol></li></ol></div>
             
 
           </div>
